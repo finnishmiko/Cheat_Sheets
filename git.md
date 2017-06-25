@@ -102,6 +102,12 @@ sudo chown -R root:git-users /srv/git/
 
 [Repair permissions](https://stackoverflow.com/questions/6448242/git-push-error-insufficient-permission-for-adding-an-object-to-repository-datab#6448326)
 ```sh
+git config core.sharedRepository
+# If it's not group or true or 1 or some mask, try running:
+
+git config core.sharedRepository group
+
+# and then run
 cd /path/to/repo.git
 chgrp -R git-users .
 chmod -R g+rwX .
