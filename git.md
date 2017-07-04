@@ -27,7 +27,7 @@ git push origin master
 ```
 
 ## New Github repository - option 2
-* Create new repository to Github without README.md and .gitignore files	
+* Create new repository to Github without README.md and .gitignore files
 * In you computer go to project folder and initialize new Git repository
 ```
 git init
@@ -50,7 +50,7 @@ git push origin master
 ## Branch
 ```sh
 git branch # Check which branch you are working
-git branch new_branch 
+git branch new_branch
 git checkout branch_name # Switch to the new branch
 
 # Then git add and commit as usual
@@ -61,6 +61,25 @@ git merge branch_name # First switch to master branch so new branch changes will
 git branch -d branch_name # will delete branch
 
 ```
+
+## Local modifications prevent `git pull origin master`
+* Git is protecting you from losing the local modifications
+```sh
+error: Your local changes to the following files would be overwritten by merge:
+        <filename>
+Please commit your changes or stash them before you merge.
+Aborting
+```
+
+[Options](https://stackoverflow.com/questions/15745045/how-do-i-resolve-git-saying-commit-your-changes-or-stash-them-before-you-can-me):
+
+1. Commit the change using
+`git commit -m "My message"`
+
+2. Stash it to a stack with `git stash`. Then do the merge and  pop your changes back in reverse order:
+`git stash pop`
+
+3. Discard all local changes using `git reset --hard` or discard local changes for a specific file using `git checkout filename`
 
 
 ## Save Git log history to a text file
@@ -88,7 +107,7 @@ git remote add origin d:/repofolder/newrepo.git # origin can be called something
 
 ## Create remote repository to Virtual Machine
 
-* Create new username: 
+* Create new username:
 ```sh
 sudo adduser username
 ```
