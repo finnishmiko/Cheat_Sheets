@@ -1,4 +1,6 @@
 # [React](https://facebook.github.io/react/)
+Following [Codecademy's](https://www.codecademy.com) Learn ReactJS course.
+
 
 [Create a new React App](#create-a-new-react-app)
 
@@ -58,24 +60,24 @@ ReactDOM.render(<h1>Hello world</h1>, document.getElementById('app'));
 
 ```javascript
 class MyComponent extends React.Component {
-	render() {
-		return (
-			<h1>Hello world</h1>
-		);
-	}
+  render() {
+    return (
+      <h1>Hello world</h1>
+    );
+  }
 }
 ```
 
 # Named exports
 Using variables, functions, classes, etc. from one file in another file.
 
-In file1.js
+In `file1.js`
 ```javascript
 export var name = ... // or let, const, function or class
 export var name2 = ...
 ```
 
-In file2.js
+In `file2.js`
 ```javascript
 import {name, name2} from './file1';
 // then use name and name2 normally
@@ -90,7 +92,7 @@ To display passed information find the component class that is going to receive 
 If no information is passed, then the default message can be defined with `defaultProps`:
 ```javascript
 MyClass.defaultProps = {
-	message: 'Default message here'
+    message: 'Default message here'
 };
 ```
 
@@ -101,7 +103,57 @@ MyClass.defaultProps = {
 	* _Name of the prop_ that is used to pass the event handler: **_onClick_**
 
 
-# Componen children
+# Component children
 Returns everything between `<MyComponent></MyComponent>`
 * If nothing is defined i.e. `<MyComponent />` then children is equal to `undefined`
 * If there are more than one child then `this.props.children` will return an array of children
+
+# Dynamic information
+Can be done with `props` and `state`. 
+
+`State` is not passed from the outside. State is declared inside of a constructor method. React component have to call `super` in their constructor to be set up properly.
+
+```javascript
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { name: 'value' };
+  }
+
+  render() {
+    return <div></div>;
+  }
+}
+
+<Example /> // Has state { name: 'value' }
+```
+
+Component can change its state with `this.setState()` function. Arguments are _object_ and _callback_, but latter is rarely needed. Function then merges the new object with the component's current state.
+
+Example use case is to call a custom function that wraps a `this.setState()` call. 
+
+```javascript
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { name: 'value' };
+	this.methodName = this.methodName.bind(this); // this line is needed
+  }
+
+  methodName() {
+	  this.setState({name2: 'value2'});
+  }
+
+  render() {
+    return (
+    <div>
+      <button onClick={this.methodName}>
+        Click me
+      </button>
+    </div>
+    );
+  }
+}
+```
+
+Calling `this.setState()` automatically calls `render()` as soon as the state has changed. Thus `setState()` can not be inside `render()`.
