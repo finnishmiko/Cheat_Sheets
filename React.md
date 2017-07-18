@@ -157,3 +157,151 @@ class Example extends React.Component {
 ```
 
 Calling `this.setState()` automatically calls `render()` as soon as the state has changed. Thus `setState()` can not be inside `render()`.
+
+
+
+# Programmin pattern
+
+An instance of the stateful ___Parent___ component class is rendered. One stateless child (___Sibling___) component displays the state, and a different stateless child (___Child___) component displays a way to change the state:
+
+```javascript
+// Parent:
+render() {
+  return (
+    <div>
+      <Child onChange={this.changeName} />
+      <Sibling name={this.state.name} />
+    </div>
+  );
+}
+
+```
+
+A _Parent_ defines a function that calls `this.setState`. (Remember to bind it to `this` in constructor) and passes that function down to a _Child_.
+
+```javascript
+// Parent
+changeName(newName) {
+  this.setState({
+    name: newName
+  });
+}
+```
+
+_Child_ defines a function that calls the passed-down function, and that can take an _event object_ `e` as an argument (remember to bind it to `this` in constructor):
+
+```javascript
+// Child
+handleChange(e) {
+    const name = e.target.value;
+    this.props.onChange(name);
+  }
+```
+
+The _Child_ uses this new function as an event handler:
+```javascript
+// Child
+<select
+  id="names"
+  onChange={this.handleChange}>
+
+  <option value="Name1">Name1</option>
+  <option value="Name2">Name2</option>
+  <option value="Name3">Name3</option>
+</select>
+```
+
+When an event (selection from dropdown menu) is detected, the _Parent's_ state updates.
+
+The _Parent_ passes down its state, distinct from the ability to change its state, to a different stateless component, ___Sibling___.
+
+That stateless _Sibling_ component class receives the state and displays it.
+
+```javascript
+// Sibling
+render() {
+  const name = this.props.name;
+  return (
+    <h1>Hey, my name is {name}!</h1>
+  );
+}
+```
+
+# Styles
+
+```javascript
+<h1 style={{ color: 'red' }}>Hello world</h1>
+```
+
+
+The outer curly braces inject JavaScript into JSX. The inner curly braces create a JavaScript object literal. 
+
+Using styles in variable:
+```javascript
+const styles = {
+  color: 'red',
+  background: 'lightblue'
+};
+
+ <h1 style={styles}>Hello world</h1>
+ ```
+
+In JavaScript style names are written in hyphenated-lowercase, but in React camelCase is used: `'margin-top' --> marginTop`
+
+
+
+# Programming pattern: separating _container_ components from _presentational_ components
+
+If a component has to have a `state`, make calculations based on `props` or manage any complex logic, then that component shouldn't also have to render HTML-like JSX.
+
+Presentational component will only have one property: `render()`. This can be rewritten as JavaScript function called a _**stateless functional component**_.
+
+```javascript
+// A component class written in the usual way:
+export class MyComponentClass extends React.Component {
+  render() {
+    return <h1>{this.props.title}</h1>;
+  }
+}
+
+// The same component class, written as a stateless functional component:
+export const MyComponentClass = (props) => {
+  return <h1>{props.title}</h1>;
+}
+
+// Works the same either way:
+ReactDOM.render(
+	<MyComponentClass />,
+	document.getElementById('app')
+);
+```
+
+
+# _propTypes_ to validation and documentation
+
+```javascript
+MyComponentClass.propTypes = {
+  nameOfProperty: React.PropTypes.expected-data-type.isRequired // string, object, bool, number, func, array
+};
+```
+
+
+# Mounting Lifecycle Methods
+Three mounting lifecycle methods:
+- **componentWillMount** gets called right before when a component renders for the first time
+- **render**
+- **componentDidMount** gets called right after the HTML from render has finished loading
+
+# Updating Lifecycle Methods
+
+Component updates every time it renders, starting with the second render. Five updating lifecycle methods:
+- **componentWillReceiveProps(nextProps)** gets called before rendering begins, if the component will receive `props`
+- **shouldComponentUpdate(nextProps, nextState)** gets also called before rendering begins. Returns _true_ or _false_. If _false_ then none of the remaining lifecycle methods for that updating period will be called
+- **componentWillUpdate(nextProps, nextState)** gets called between shouldComponentUpdate and render. This is used to interact with things outside of the React
+- **render**
+- **componentDidUpdate(prevProps, prevState)** gets called after any rendered HTML has finished loading
+
+
+# Unmounting Lifecycle Methods
+- **componentWillUnmount(prevProps, prevState)** gets called right before a component is removed from the DOM
+
