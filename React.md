@@ -1,9 +1,27 @@
 # [React](https://facebook.github.io/react/)
-Following [Codecademy's](https://www.codecademy.com) Learn ReactJS course.
+Following [Codecademy's](https://www.codecademy.com) Learn ReactJS course:
 
 
-[Create a new React App](#create-a-new-react-app)
+* [Create a new React App](#create-a-new-react-app)
+* [JSX is a syntax extension for JavaScript](#jsx-is-a-syntax-extension-for-javascript)
+* [Rendering JSX](#rendering-jsx)
+* [React component](#react-component)
+* [Named exports](#named-exports)
+* [Component props](#component-props)
+* [Naming convention](#naming-convention)
+* [Component children](#component-children)
+* [Dynamic information](#dynamic-information)
+* [Programmin pattern](#programmin-pattern)
+* [Styles](#styles)
+* [Programming pattern: separating _container_ components from _presentational_ components](#programming-pattern-separating-container-components-from-presentational-components)
+* [_propTypes_ to validation and documentation](#proptypes-to-validation-and-documentation)
+* [Mounting Lifecycle Methods](#mounting-lifecycle-methods)
+* [Updating Lifecycle Methods](#updating-lifecycle-methods)
+* [Unmounting Lifecycle Methods](#unmounting-lifecycle-methods)
 
+
+And other items as well:
+* [React with Express](#react-with-express)
 
 # Create a new React App
 
@@ -17,7 +35,7 @@ npm start
 
 # JSX is a syntax extension for JavaScript
 
-* Multiline JSX elements needs to be wrapped is parentheses. 
+* Multiline JSX elements needs to be wrapped is parentheses.
 * a JSX expession must have exactly _one_ outermost element
 * JSX doesn't add numbers, but you can do that with curly braces, which treats the code like normal JavaScript
 
@@ -47,7 +65,7 @@ It only updates DOM elements that have changed.
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// ReactDOM is a JavaScript library and render is it's method. 
+// ReactDOM is a JavaScript library and render is it's method.
 // Render's first argument should evaluate to a JSX expression.
 // Second argument defines the element where JSX is appended.
 ReactDOM.render(<h1>Hello world</h1>, document.getElementById('app'));
@@ -109,7 +127,7 @@ Returns everything between `<MyComponent></MyComponent>`
 * If there are more than one child then `this.props.children` will return an array of children
 
 # Dynamic information
-Can be done with `props` and `state`. 
+Can be done with `props` and `state`.
 
 `State` is not passed from the outside. State is declared inside of a constructor method. React component have to call `super` in their constructor to be set up properly.
 
@@ -130,7 +148,7 @@ class Example extends React.Component {
 
 Component can change its state with `this.setState()` function. Arguments are _object_ and _callback_, but latter is rarely needed. Function then merges the new object with the component's current state.
 
-Example use case is to call a custom function that wraps a `this.setState()` call. 
+Example use case is to call a custom function that wraps a `this.setState()` call.
 
 ```javascript
 class Example extends React.Component {
@@ -234,7 +252,7 @@ render() {
 ```
 
 
-The outer curly braces inject JavaScript into JSX. The inner curly braces create a JavaScript object literal. 
+The outer curly braces inject JavaScript into JSX. The inner curly braces create a JavaScript object literal.
 
 Using styles in variable:
 ```javascript
@@ -304,4 +322,24 @@ Component updates every time it renders, starting with the second render. Five u
 
 # Unmounting Lifecycle Methods
 - **componentWillUnmount(prevProps, prevState)** gets called right before a component is removed from the DOM
+
+
+# React with Express
+* Install Express with _Express-Generator_ to `myApp`-folder
+  * change Express port to 3001 since React uses port 3000
+  * Run `npm install`
+  * Modify f.ex. users-route to return some simple JSON file
+* Install React app to `myApp\client`-folder: `create-react-app client`
+  * To get client requests to back end work correctly add `"proxy": "http://localhost:3001/",` to `client\package.json`
+  * Create a client side request to React's App.js:
+```javascript
+// It is important to 1) accept JSON and 2) convert the response to JSON before using it. Otherwise proxying to port 3001 does not work
+fetch('api/users', {'accept': 'application/json'})
+		  .then(res => res.json())
+		  .then(users => console.log(users) );
+	  }
+```
+* Install _Concurrently_ to run React and Express at the same time: `npm i --save-dev concurrently`
+  * change `myApp\package.json`'s start command to: `"start": "concurrently \"node ./bin/www\" \"cd client && npm start\""`
+  * Start both Express and React with `npm start`
 
