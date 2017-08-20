@@ -343,3 +343,27 @@ fetch('api/users', {'accept': 'application/json'})
   * change `myApp\package.json`'s start command to: `"start": "concurrently \"node ./bin/www\" \"cd client && npm start\""`
   * Start both Express and React with `npm start`
 
+# React Router
+
+* Can be implemented with `react-router-dom`. Install it with `npm` and import:
+
+```javascript
+import {
+	BrowserRouter as Router,
+	Route,
+	Link
+  } from 'react-router-dom';
+
+// Create a link to Login component and route to it:
+<Link to="/login">Login</Link>
+<Route path="/login" component={Login} />
+
+```
+
+### Passing _props_ to _component_
+```html
+<!-- Not like this -->
+<Route path="/login" isAuthenticated={isAuthenticated} component={Login} />
+
+<!-- This works -->
+<Route path="/login" component={ (props) => <Login {...props} isAuthenticated={isAuthenticated} />} />```
