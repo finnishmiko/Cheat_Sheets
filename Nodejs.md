@@ -73,6 +73,29 @@ function example() {
 }
 ```
 
+#### [ForEach-loop with promises:](https://stackoverflow.com/questions/31413749/node-js-promise-all-and-foreach)
+
+```javascript
+// Sample array
+var items = [1, 2, 3, 4, 5];
+
+// Sample async action
+var fn = function asyncMultiplyBy2(v){
+    return new Promise(resolve => setTimeout(() => resolve(v * 2), 100));
+};
+
+// Run the function over all items and create a promises array
+var actions = items.map(fn);
+
+// Pass the array of promises
+var results = Promise.all(actions);
+
+// Check results
+results.then(data =>
+    console.log(data) // [2, 4, 6, 8, 10]
+);
+```
+
 
 ### Check if some library is installed
 ```js
