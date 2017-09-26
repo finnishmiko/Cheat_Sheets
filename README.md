@@ -7,3 +7,4 @@
 * [React](React.md)
 * [Nodejs](Nodejs.md)
 * [MongoDB](MongoDB.md)
+* [Azure](Azure.md)
