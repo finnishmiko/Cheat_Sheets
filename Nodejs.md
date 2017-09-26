@@ -33,6 +33,31 @@ app.get('/', () => {
 
 ### Promises
 
+
+https://developers.google.com/web/fundamentals/getting-started/primers/promises
+Creating a promise:
+```js
+var promise = new Promise(function(resolve, reject) {
+  // do a thing, possibly async, then…
+
+  if (/* everything turned out fine */) {
+    resolve("Stuff worked!");
+  }
+  else {
+    reject(Error("It broke"));
+  }
+});
+```
+
+Using that promise:
+```js
+promise.then(function(result) {
+  console.log(result); // "Stuff worked!"
+}, function(err) {
+  console.log(err); // Error: "It broke"
+});
+```
+
 https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
 
 ```javascript
