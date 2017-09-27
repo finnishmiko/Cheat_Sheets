@@ -25,3 +25,24 @@ git commit -m "Initial Azure commit"
   * You will be prompted for the username and password created earlier.
 
 6. Visit your app at `webappname.azurewebsites.net`
+
+
+## Deploy Node Express Web App from local Git repository
+Few additions to the React guide:
+- Node default version is 0.10 so it needs to be updated.
+- Add to the `package.json`:
+```js
+"engines": {
+"node": "8.5.0",
+"npm": "4.2.0"
+},
+```
+
+- Create `iisnode.yml` with content:
+```sh
+nodeProcessCommandLine: "D:\Program Files (x86)\nodejs\8.5.0\node.exe"
+```
+
+- To the Azure Portal _Application Settings_ add `WEBSITE_NODE_DEFAULT_VERSION` as a key and value is the version `8.5.0`
+
+- If you have used Bower for client side packages they need to be installed manually. Go with web brower to `webappname.scm.azurewebsites.net`. Select `CMD` from _Debug console_ and go to the folder `site/wwwroot` and run `bower install`
