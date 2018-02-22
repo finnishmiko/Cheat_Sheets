@@ -136,10 +136,38 @@ find . -type d -exec chmod g+s '{}' +
 sudo chgrp -R git-users . && sudo chmod -R g+rwX . && sudo find . -type d -exec chmod g+s '{}' +
 ```
 
-
+Add git repository as a remote or clone existing repository:
 
 ```sh
 git remote add origin <username>@<path to server>:/srv/git/test.git
 
 git clone <username>@<path to server>:/srv/git/test.git
 ```
+
+## Push changes directly to a web site
+
+
+[Followed this guide to ](http://toroid.org/git-website-howto)
+"__push__ into a __remote__ repository that has a detached work tree, and a __post-receive__ hook that runs `git checkout -f`."
+
+
+1. Create local repository that is used for development
+2. Create remote repository folder `project.git` and run `git init --bare` in that folder
+3. Create another folder that will have latest tree into the webserver's DocumentRoot: `mkdir /var/www/project`
+4. Create Git hook that will run when new commits are reveived. To `project.git/hooks` folder create a file `post-receive` with content:
+
+```sh
+#!/bin/sh
+GIT_WORK_TREE=/var/www/project git checkout -f
+```
+
+and modify its permissions:
+`chmod +x hooks/post-receive`.
+
+5. To development repository add Git remote and push master branch there:
+```sh
+$ git remote add web <username>@<server>:<path>/project.git
+$ git push web +master:refs/heads/master
+```
+
+6. Push following commits normally and web page will be updated.
