@@ -62,6 +62,15 @@ git branch -d branch_name # will delete branch
 
 ```
 
+Get the branch from remote:
+
+
+```sh
+git fetch origin # Find out the name of the remote branch
+git checkout --track origin/branch_name
+```
+
+
 ## Local modifications prevent `git pull origin master`
 * Git is protecting you from losing the local modifications
 ```sh
