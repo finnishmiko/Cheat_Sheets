@@ -16,4 +16,12 @@ Check the running Node tasks
 ps -e|grep node
 ```
 
+## Copy files to and from server
 
+```sh
+scp username@source:/location/to/file username@destination:/where/to/put
+```
+
+F.ex. copy a file from Raspberry to a local machine.
+
+`scp username@192.168.1.2:/home/pi/project/file.txt /c/project`
