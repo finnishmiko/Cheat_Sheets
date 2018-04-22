@@ -22,6 +22,8 @@ Following [Codecademy's](https://www.codecademy.com) Learn ReactJS course:
 
 And other items as well:
 * [React with Express](#react-with-express)
+* [React Router](#react-router)
+* [Deploy to Firebase](#deploy-to-firebase)
 
 # Create a new React App
 
@@ -366,4 +368,23 @@ import {
 <Route path="/login" isAuthenticated={isAuthenticated} component={Login} />
 
 <!-- This works -->
-<Route path="/login" component={ (props) => <Login {...props} isAuthenticated={isAuthenticated} />} />```
+<Route path="/login" component={ (props) => <Login {...props} isAuthenticated={isAuthenticated} />} />
+```
+
+
+
+# Deploy to Firebase
+
+```sh
+npm run buid
+npm i -g firebase-tools
+firebase login
+firebase init # run inside project folder
+# Select Hosting: Configure and deploy Firebase Hosting sites
+# Select a default Firebase project 
+# What do you want to use as your public directory: build
+cd build
+firebase serve # Test locally
+cd ..
+firebase deploy # Deploy to Firebase
+```
