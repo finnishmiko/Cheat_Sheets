@@ -69,6 +69,12 @@ Get the branch from remote:
 git fetch origin # Find out the name of the remote branch
 git checkout --track origin/branch_name
 ```
+or if the branch name is not visible with above commands:
+```sh
+git fetch origin # Find out the name of the remote branch
+git branch -v -a # See all the branches available for checkout
+git checkout -b branch_name origin/branch_name
+```
 
 
 ## Local modifications prevent `git pull origin master`
