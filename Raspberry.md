@@ -1,5 +1,24 @@
 # Raspberry pi
 
+## Memory card setup
+- Memory card formatting with Diskpart:
+```sh
+diskpart
+list disk
+sel disk 1
+clean
+
+CREATE PARTITION PRIMARY
+FORMAT FS=FAT32 QUICK
+ASSIGN
+
+list vol
+list par
+exit
+```
+- Use __Win32 Disk Imager__ to copy image to SD card
+
+
 ## Run node program at startup
 ```sh
 sudo nano /ect/rc.local
