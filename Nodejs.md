@@ -1,6 +1,9 @@
 # [Nodejs](https://nodejs.org/en/)
 
-Create `package.json` with `npm init`
+- Create `package.json` with `npm init`
+- `npm up` # Update packages. Run also with `-g`
+- `npm outdated` # Check for outdated packages. Run also with `-g`
+- Update packages major version: `npm i package@2.0.0`
 
 ### Check if variable exists
 
