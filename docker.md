@@ -1,5 +1,11 @@
 # [Get started with Docker](https://docs.docker.com/get-started/)
 
+## Commands
+* `docker ps`
+* `docker ps -a`
+* `docker images`
+* `docker volume ls`
+
 ## Containers
 * Create following files:
   * [Dockerfile](docker-getting_started/Dockerfile)

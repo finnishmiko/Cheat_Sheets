@@ -1,5 +1,8 @@
 # Raspberry pi
 
+## Linux commands
+* `ps -ef|grep node` # List Node processes
+
 ## Memory card setup
 - Memory card formatting with Diskpart:
 ```sh

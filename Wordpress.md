@@ -84,7 +84,7 @@ Create these two files with dynamic information:
 </html>
 ```
 
-And call them in `index.php` with `<?php wp_header(); ?>` and `<?php get_footer(); ?>`
+And call them in `index.php` with `<?php get_header(); ?>` and `<?php get_footer(); ?>`
 
 
 ## Add new option to theme Customizer

@@ -4,6 +4,7 @@
 Mongo's bin-folder:
   * Start server: `mongod`
   * Start shell: `mongo`
+  * Manage settings in Windows with Services Manager: `services.msc`
 
 Shell:
 * Show commands: `help`
@@ -19,10 +20,13 @@ Shell:
 ---
 ### Docker Mongo
 * `docker pull mongo`
-* `docker run --name some-mongo -d mongo`
+* `docker run -d --name some-mongo -p 27017:27017 mongo` # Create Mongo server image
+* `docker stop some-mongo` # stop service
+* `docker start some-mongo` # start service
+* `docker exec -it some-mongo mongo` # Use Mongo shell
 
 Code:
 ```javascript
-var url = 'mongodb://mongo:27017/test';
-// i.e. replace localhost with mongo
+var url = 'mongodb://localhost/test';
+// i.e. same as with local Mongo
 ```
