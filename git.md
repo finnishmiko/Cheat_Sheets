@@ -12,6 +12,12 @@ git config user.name
 git config user.email
 ```
 
+End of line settings:
+
+```sh
+git config --global core.autocrlf true
+```
+
 ## New Github repository - option 1
 * Create new repository to Github with README.md and .gitignore files
 * Clone that repository to your computer
