@@ -102,6 +102,16 @@ Aborting
 git --no-pager log > log.txt
 ```
 
+## Detached HEAD state
+- Switch to specific commit in Git history:
+`git checkout [commit hash]`
+- This is just for viewing history at a certain point in time
+- Any commits in this mode won't be added to a branch. But new branch can be made from this commit with: `git checkout -b [new branch name]`.
+- Return to the branch you came from with:
+`git checkout -`
+- Or return to master branch with `git checkout master`
+
+
 ## Set Git-server in uSD-card in local computer:
 * Go to uSD-drive (f.ex. D:/) and create a repository folder and in it new project repository:
 ```sh
@@ -186,3 +196,67 @@ $ git push web +master:refs/heads/master
 ```
 
 6. Push following commits normally and web page will be updated.
+
+## Another _post-receive_ hook example with bash
+
+This time only production branch gets deployed. Also the project is installed and build before publishing to web site.
+
+
+```bash
+#!/bin/bash
+BRANCH="production"
+while read oldrev newrev ref
+do
+    # only checking out the wanted branch
+    if [[ $ref = refs/heads/"$BRANCH" ]];
+    then
+        echo "Ref $ref received. Deploying branch to production..."
+        git --work-tree=/home/user/project/ --git-dir=/home/user/project.git/ checkout "$BRANCH" -f
+    else
+        echo "Ref $ref successfully received. Doing nothing: only the ${BRANCH} branch can be deployed to this server."
+    fi
+done
+echo "Change to project directory and install"
+cd /home/user/project
+npm i
+if [[ $? -eq 0 ]];
+then
+    echo "Installing Ok"
+else
+    echo "Installing Failed"
+    exit 1
+fi
+
+echo "Building"
+npm run build
+if [[ $? -eq 0 ]];
+then
+    echo "Building Ok"
+else
+    echo "Building Failed"
+    exit 1
+fi
+
+echo "Create backup of current web site"
+mkdir /home/user/project/backup/`date +%F`
+cp -r /var/www/html/project/* /home/user/project/backup/`date +%F`/
+if [[ $? -eq 0 ]];
+then
+    echo "Backup Ok"
+else
+    echo "Backup Failed"
+    exit 1
+fi
+
+echo "Updating web UI"
+sudo rm -rf /var/www/html/project/*
+sudo cp -r /home/user/project/build/* /var/www/html/project/
+if [[ $? -eq 0 ]];
+then
+    echo "Deployment Ok"
+else
+    echo "Deployment failed. Copy old project back to server"
+    cp -r /home/user/project/backup/`date +%F`/* /var/www/html/project/
+    exit 1
+fi
+```

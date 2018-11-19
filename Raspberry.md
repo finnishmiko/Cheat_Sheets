@@ -2,6 +2,9 @@
 
 ## Linux commands
 * `ps -ef|grep node` # List Node processes
+* `cat <file name>` # View content of file
+* `head -20 <file name>` # View first 20 lines of file
+
 
 ## Memory card setup
 - Memory card formatting with Diskpart:
@@ -72,7 +75,7 @@ server {
  }
 ```
 
-Then enable the file:
+Then enable the file by creating a symbolic link:
 
 ```sh
 cd /etc/nginx/sites-enabled/ 
