@@ -30,3 +30,7 @@ Code:
 var url = 'mongodb://localhost/test';
 // i.e. same as with local Mongo
 ```
+
+---
+
+If connection string username or password has `@`-character, it needs to be URL encoded to `%40`.

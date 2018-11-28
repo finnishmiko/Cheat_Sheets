@@ -3,7 +3,51 @@
 - Create `package.json` with `npm init`
 - `npm up` # Update packages. Run also with `-g`
 - `npm outdated` # Check for outdated packages. Run also with `-g`
-- Update packages major version: `npm i package@2.0.0`
+- List installed packages: `npm ls`. Options `-g` and `--depth=0`
+- Update packages major version: 
+```
+npm remove package
+npm i --save package
+```
+
+### Run Node server in Docker
+
+``Dockerfile``
+
+```docker
+FROM node:10-alpine
+COPY . /opt/service
+WORKDIR /opt/service
+ENV NODE_ENV=production
+ENV MONGO_SERVER=mongodb://<IP address>:<Port>/<collection>
+RUN apk add --no-cache make gcc g++ python && \
+	npm install && \
+	apk del make gcc g++ python
+EXPOSE 3000
+CMD npm start
+
+```
+
+Also create `.dockerignore` file and add it folders that are not needed like `node_modules`.
+
+Run:
+
+```sh
+docker build -t some-node .
+docker run --it -p 3000:3000 --rm some-node
+```
+
+### Fetch to work in all browsers with [cross-fetch](https://www.npmjs.com/package/cross-fetch)
+
+```javascript
+npm install --save cross-fetch
+
+# Using ES6 modules with Babel or TypeScript
+import fetch from 'cross-fetch';
+ 
+# Using CommonJS modules
+const fetch = require('cross-fetch');
+```
 
 ### Check if variable exists
 
