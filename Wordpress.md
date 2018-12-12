@@ -1,5 +1,31 @@
 # Wordpress Theme Development
 
+## Docker: Wordpress and database in separate containers
+
+```sh
+# Set up MariaDB
+docker run --name some-mariadb -e MYSQL_ROOT_PASSWORD=my-password -d mariadb:latest
+
+# Logs of running container
+docker logs some-mariadb
+
+# Container's IPAddress can be found with this command. This is needed during Wordpress installation.
+docker inspect some-mariadb
+
+# Set up PhpMyAdmin
+docker run --name some-phpmyadmin -d --link some-mariadb:db -p 8080:80 phpmyadmin/phpmyadmin
+
+# Then go to http://localhost:8080 and log in with username _root_ and password _my-password_. Then create database table for wordpress.
+
+# Set up Wordpress
+docker run --name some-wordpress --link ajr-mariadb:mariadb -p 5000:80 -d wordpress
+
+# Then go to http://localhost:5000 and start Wordpress with created database name, username _root_, password _my-password_ and database host _IPAddress_.
+
+```
+
+
+
 ## Planning example:
 
 * SPA type front page with multiple sections and navigation between these parts 

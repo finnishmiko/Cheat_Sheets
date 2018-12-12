@@ -34,3 +34,11 @@ var url = 'mongodb://localhost/test';
 ---
 
 If connection string username or password has `@`-character, it needs to be URL encoded to `%40`.
+
+
+## Transfer database
+
+```sh
+mongodump --db test --collection collection
+mongorestore --collection collection --db test dump/
+```
