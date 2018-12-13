@@ -2,6 +2,8 @@
 
 ## Docker: Wordpress and database in separate containers
 
+New Wordpress
+
 ```sh
 # Set up MariaDB
 docker run --name some-mariadb -e MYSQL_ROOT_PASSWORD=my-password -d mariadb:latest
@@ -18,12 +20,20 @@ docker run --name some-phpmyadmin -d --link some-mariadb:db -p 8080:80 phpmyadmi
 # Then go to http://localhost:8080 and log in with username _root_ and password _my-password_. Then create database table for wordpress.
 
 # Set up Wordpress
-docker run --name some-wordpress --link ajr-mariadb:mariadb -p 5000:80 -d wordpress
+docker run --name some-wordpress --link some-mariadb:mariadb -p 5000:80 -d wordpress
 
 # Then go to http://localhost:5000 and start Wordpress with created database name, username _root_, password _my-password_ and database host _IPAddress_.
 
 ```
 
+If existing database and Wordpress uploads, theme, plugin, etc. content are used, copy these files to local PC. 
+- Database can be imported to Docker SQL with PhpMyAdmin. Also update `wp_options` table's `siteurl` and `home` to contain `http://localhost:5000`
+- `Uploads` folder can be set as a volume to Docker container. Note that in Windows local admin rights are needed to do this (share C-drive from the Docker UI).
+
+```sh
+# Use local files inside Docker container with --volume option. Use as many volumes as is needed.
+docker run --name some-wordpress --link some-mariadb:mariadb -p 5000:80 -v C:/Path/to/local/Wordpress/wp-content/uploads:/var/www/html/wp-content/uploads -d wordpress
+```
 
 
 ## Planning example:
