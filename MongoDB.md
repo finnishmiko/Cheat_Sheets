@@ -15,7 +15,18 @@ Shell:
 * List objects in collection: `db.collection.find()`
 * Delete collection: `db.collection.drop()`
 * Show collection contents `db.collection.find().pretty().limit(5)`
-
+* Delete document: `db.collection.deleteOne({<query>})`
+* Update codument. Both booleans below defaults false. Upsert true means that new document is created if no document match the filter.
+```sh
+db.collection.findOneAndUpdate(
+   {<filter>},
+   {$set: {<update>}},
+   {
+     upsert: <boolean>,
+     returnNewDocument: <boolean>
+   }
+)
+```
 
 ---
 ### Docker Mongo
