@@ -4,7 +4,7 @@
 * [Docker](docker.md)
 * [ESP8266](ESP8266.md)
 * [Git](git.md)
-* [Java](java.md)
+* [Java](Java.md)
 * [MongoDB](MongoDB.md)
 * [Nodejs](Nodejs.md)
 * [PHP](PHP.md)
