@@ -26,6 +26,22 @@ git commit -m "Initial Azure commit"
 
 6. Visit your app at `webappname.azurewebsites.net`
 
+## Chrome console says it can't load `manifest.json` file
+
+To fix that `web.config` file needs to be added to to `wwwroot` folder ([sourse](https://stackoverflow.com/questions/48137750/azure-web-app-does-not-load-json-file)):
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <system.webServer>
+    <staticContent>
+      <remove fileExtension=".json"/>
+      <mimeMap fileExtension=".json" mimeType="application/json"/>
+    </staticContent>
+  </system.webServer>
+</configuration>
+```
+
 
 ## Deploy Node Express Web App from local Git repository
 Few additions to the React guide:
