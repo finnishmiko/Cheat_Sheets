@@ -1,5 +1,30 @@
 # Azure
 
+## Static web app to Storage account and SSL certificate with Azure CDN
+
+1. Create storage account (general-purpose v2)
+2. Enable static web page and set index document name to `index.html`
+	- Also 404-page document can be specified
+3. Then copy static web site files to `$web` folder
+	- The web page is then hosted at https://mywebpage.z16.web.core.windows.net/
+	- Only https is used
+4. Custom domain
+	- Currently https is not supported with custom domain to storage account
+	- HTTPS can be enabled with Azure CDN. However CDN does not support root domain (mywebpage.com) - hostname needs to be used (www.mywebpage.com)
+
+	1. Create CDN profile (Standard Verizon)
+	2. Add endpoint to storage account
+	3. Endpoint origin is `Custom origin` that poins to `mywebpage.z16.web.core.windows.net`
+	4. Then the web page is available from `https://mywebpage.azureedge.net`
+	5. Map custom domain to this endpoint by adding CNAME record to the DNS provider's web site. And after that add it to the CDN endpoint.
+	6. Enable HTTPS - this takes many hours
+	- At this point HTTPS works, but HTTP does not. HTTP can be enabled from Storage account configuration and disabling Secure transfer requirement.
+	- Redirecting HTTP to HTTPS requires Azure CDN premium from Verizon.
+
+Note that default caching rules is set to 7 days expiration. At least `service-worker.js` should be bypassed so that new SW version is recognized. Also note that the UI indicator needs to be implemented to React code.
+
+Cache at Azure CDN can be cleared from Azure Portal using Purge feature.
+
 ## Deploy React Web App from local Git repository
 
 1. Create new _Azure Web app_ using Azure Portal
