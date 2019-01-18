@@ -83,6 +83,22 @@ git checkout -b branch_name origin/branch_name
 ```
 
 
+Update development branch from master branch (dev branch is checked out).
+
+```sh
+git fetch
+git rebase origin/master
+
+# If there is error: Failed to merge in the changes.
+# Then resolve conflicts and add files with
+git add file_name
+
+# and continue with
+git rebase --continue
+
+```
+
+
 ## Local modifications prevent `git pull origin master`
 * Git is protecting you from losing the local modifications
 ```sh
