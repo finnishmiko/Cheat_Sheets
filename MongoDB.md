@@ -39,7 +39,8 @@ db.collection.findOneAndUpdate(
 Code:
 ```javascript
 var url = 'mongodb://localhost/test';
-// i.e. same as with local Mongo
+// i.e. same as with local Mongo.
+// With Docker local IP address is needed instead of localhost
 ```
 
 ---

@@ -98,6 +98,12 @@ git rebase --continue
 
 ```
 
+Delete local branch
+
+```sh
+git branch -d branch_name
+```
+
 
 ## Local modifications prevent `git pull origin master`
 * Git is protecting you from losing the local modifications
