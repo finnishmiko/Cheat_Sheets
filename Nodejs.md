@@ -1,5 +1,16 @@
 # [Nodejs](https://nodejs.org/en/)
 
+* [Command line](#Command-line)
+* [Run Node server in Docker](#Run-Node-server-in-Docker)
+* [Fetch to work in all browsers with cross-fetch](#Fetch-to-work-in-all-browsers-with-cross-fetch)
+* [Check if object with `id:'10'` is in object array](#Check-if-object-with-`id:'10'`-is-in-object-array)
+* [ES6-syntax](#ES6-syntax)
+* [Promises](#Promises)
+* [ForEach-loop with promises](#ForEach-loop-with-promises)
+* [Check if some library is installed](#Check-if-some-library-is-installed)
+
+
+## Command line
 - Create `package.json` with `npm init`
 - `npm up` # Update packages. Run also with `-g`
 - `npm outdated` # Check for outdated packages. Run also with `-g`
@@ -10,7 +21,7 @@ npm remove package
 npm i --save package
 ```
 
-### Run Node server in Docker
+## Run Node server in Docker
 
 ``Dockerfile``
 
@@ -37,7 +48,7 @@ docker build -t some-node .
 docker run --it -p 3000:3000 --rm some-node
 ```
 
-### Fetch to work in all browsers with [cross-fetch](https://www.npmjs.com/package/cross-fetch)
+## Fetch to work in all browsers with [cross-fetch](https://www.npmjs.com/package/cross-fetch)
 
 ```javascript
 npm install --save cross-fetch
@@ -57,14 +68,14 @@ if (typeof variable === 'undefined' || variable === null) {
 }
 ```
 
-### Check if object with `id:'10'` is in object array
+## Check if object with `id:'10'` is in object array
 ```javascript
 objectArray.find(o => o.id === '10')
 // Returns the value of first element in the array that satisfies the testing function
 // Otherwise undefined is returned
 ```
 
-### ES6-syntax:
+## ES6-syntax
 
 ```javascript
 app.get('/', function(){
@@ -78,7 +89,7 @@ app.get('/', () => {
 ```
 
 
-### Promises
+## Promises
 
 
 https://developers.google.com/web/fundamentals/getting-started/primers/promises
@@ -145,7 +156,7 @@ function example() {
 }
 ```
 
-#### [ForEach-loop with promises:](https://stackoverflow.com/questions/31413749/node-js-promise-all-and-foreach)
+## [ForEach-loop with promises](https://stackoverflow.com/questions/31413749/node-js-promise-all-and-foreach)
 
 ```javascript
 // Sample array
@@ -169,7 +180,7 @@ results.then(data =>
 ```
 
 
-### Check if some library is installed
+## Check if some library is installed
 ```js
 // Check if some f.ex. OracleDB Node library is installed
 function moduleAvailable(name) {
