@@ -29,3 +29,32 @@ Get-ChildItem env:
 # See current env variables in Linux:
 printenv
 ```
+
+# SSH keys
+
+In home `folder/.ssh` run:
+
+```sh
+ssh-keygen -t rsa
+# Filename f.ex. id_rsa
+
+# Check created public key:
+more id_rsa.pub
+```
+
+Add public key to Virtual Machine's `.ssh` folder `authorized_keys` file.
+
+In local machine `.ssh` folder add file `config` with content:
+```sh
+Host loginnametoserver
+	User loginnametoserver
+	Hostname test.server.com
+```
+
+```sh
+# Now you can login to VM with 
+ssh loginnametoserver
+
+# instead of 
+ssh loginnametoserver@test.server.com
+```

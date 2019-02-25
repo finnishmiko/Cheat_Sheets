@@ -11,6 +11,14 @@ Command | Description
 `docker logs CONTAINER --since 10m` | Fetch logs for last 10 minutes from container: 
 [`docker cp`](https://docs.docker.com/engine/reference/commandline/cp/) | Copy files to and from container
 
+## Docker volumes in Windows
+
+To use Docker volumes in Windows local admin rights are needed. If normally log in is done with AzureAD account then separate local admin account is needed:
+- Windows settings: Create DockerAdmin local admin account with Administrator priviledges
+- Log in and logout to DockerAdmin
+- Share the required folder from AzureAD account to DockerAdmin. Read/write access is needed
+- Docker settings \ Shared Drives select drive C and login with DockerAdmin account
+
 
 ## Containers
 * Create following files:
