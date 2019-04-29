@@ -11,6 +11,58 @@ Command | Description
 `docker logs CONTAINER --since 10m` | Fetch logs for last 10 minutes from container: 
 [`docker cp`](https://docs.docker.com/engine/reference/commandline/cp/) | Copy files to and from container
 
+## Docker images
+
+### Open TCP port for Docker in VM
+```
+# /etc/systemd/system/docker.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
+```
+
+### SSH setup for docker images
+```
+ssh myuser@mypage.fi -L 22376:localhost:2376
+```
+or add following to ssh config and use only `ssh mypage`
+
+### .ssh/config
+```
+Host mypage
+	Hostname mypage.fi
+	User myuser
+	LocalForward 22376 localhost:2376
+```
+
+### Deployment
+```
+# **** Set env variable to use Docker with SSH port forward
+# $env:DOCKER_HOST="localhost:22376"
+# **** add stack
+# docker stack deploy -c .\mypage.yml mypage
+# **** remove stack
+# docker stack rm mypage
+# *** update service image
+# docker service update --force --detach=false --image=mypage-front:latest mypage-front
+#
+```
+
+### mypage.yml
+```yml
+version: '3'
+services:
+  nginx-front:
+    image: mypage-front
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 10s
+    ports:
+      - 8080:80
+```
+
 ## Docker volumes in Windows
 
 To use Docker volumes in Windows local admin rights are needed. If normally log in is done with AzureAD account then separate local admin account is needed:
