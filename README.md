@@ -20,6 +20,9 @@
 # Set env variable
 $env:APP_BACKEND_URL="http://localhost:3001/api/0.01/"
 
+# Set env variable in Linux
+export APP_BACKEND_URL="http://localhost:3001/api/0.01/"
+
 # Delete env variable
 Remove-Item Env:\APP_BACKEND_URL
 

@@ -69,6 +69,14 @@ To fix that `web.config` file needs to be added to to `wwwroot` folder ([sourse]
 
 
 ## Deploy Node Express Web App from local Git repository
+
+Build font end code and serve it as static files with Express.
+
+Add to package.json backend proxy:
+```js
+"proxy": "http://localhost:4000",
+```
+
 Few additions to the React guide:
 - Node default version is 0.10 so it needs to be updated.
 - Add to the `package.json`:
