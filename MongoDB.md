@@ -14,9 +14,13 @@ Shell:
 - Create or select existing DB: `use <dbname>`
 - Show collections: `show collections`
 - List objects in collection: `db.collection.find()`
+	- Sort in reverse order: `.sort({"_id": -1})`
+	- Find all emails with gmail: `.find({"email": /gmail\.com/})`
+	- Find all documents with key "email": `.find({email: {$exists: 1}})`
 - Delete collection: `db.collection.drop()`
 - Show collection contents `db.collection.find().pretty().limit(5)`
 - Delete document: `db.collection.deleteOne({<query>})`
+	- Delete from all documents key value pair where key is "email": `.updateMany({}, {$unset: {email: {$exists: 1}}})`
 - Inser document: `db.collection.insertOne({name: "Name"})`
 - Update codument. Both booleans below defaults false. Upsert true means that new document is created if no document match the filter.
 
