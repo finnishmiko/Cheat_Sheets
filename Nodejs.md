@@ -1,5 +1,6 @@
 # [Nodejs](https://nodejs.org/en/)
 
+* [JavaScript](#JavaScript)
 * [Command line](#Command-line)
 * [Run Node server in Docker](#Run-Node-server-in-Docker)
 * [Fetch to work in all browsers with cross-fetch](#Fetch-to-work-in-all-browsers-with-cross-fetch)
@@ -9,6 +10,12 @@
 * [ForEach-loop with promises](#ForEach-loop-with-promises)
 * [Check if some library is installed](#Check-if-some-library-is-installed)
 
+## JavaScript
+
+- Clone contents of an array: 
+```JavaScript
+const clone = myArray.slice(0)
+```
 
 ## Command line
 - Create `package.json` with `npm init`

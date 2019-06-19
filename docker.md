@@ -48,6 +48,15 @@ Host mypage
 #
 ```
 
+## Removing old containers than are not in use
+```
+docker image ls
+docker image prune
+
+docker container ls
+docker container prune
+```
+
 ### mypage.yml
 ```yml
 version: '3'
