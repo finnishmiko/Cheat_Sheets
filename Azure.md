@@ -1,5 +1,88 @@
 # Azure
 
+## Create VM with Azure CLI
+
+```
+USERNAME=azureuser
+PASSWORD=$(openssl rand -base64 32)
+
+az vm create \
+  --name myVM \
+  --resource-group My-resource-group-name \
+  --image Win2019Datacenter \
+  --size Standard_DS2_v2 \
+  --location eastus \
+  --admin-username $USERNAME \
+  --admin-password $PASSWORD
+
+az vm get-instance-view \
+  --name myVM \
+  --resource-group My-resource-group-name \
+  --output table
+```
+
+
+## Settings file example
+
+```
+az vm extension set \
+  --resource-group My-resource-group-name \
+  --vm-name myVM \
+  --name CustomScriptExtension \
+  --publisher Microsoft.Compute \
+  --settings "{'fileUris':['https://raw.githubusercontent.com/MicrosoftDocs/mslearn-welcome-to-azure/master/configure-iis.ps1']}" \
+  --protected-settings "{'commandToExecute': 'powershell -ExecutionPolicy Unrestricted -File configure-iis.ps1'}"
+```
+
+
+### configure-iis.ps1
+
+```
+# Install IIS.
+dism /online /enable-feature /featurename:IIS-WebServerRole
+
+# Set the home page.
+Set-Content `
+  -Path "C:\\inetpub\\wwwroot\\Default.htm" `
+  -Value "<html><body><h2>Welcome to Azure! My name is $($env:computername).</h2></body></html>"
+```
+
+
+## Open port
+
+```
+az vm open-port \
+  --name myVM \
+  --resource-group My-resource-group-name \
+  --port 80
+
+az vm show \
+  --name myVM \
+  --resource-group My-resource-group-name \
+  --show-details \
+  --query [publicIps] \
+  --output tsv
+
+# Then visit the IP address with browser
+```
+
+
+## Resize VM
+
+```
+az vm resize \
+  --resource-group My-resource-group-name \
+  --name myVM \
+  --size Standard_DS3_v2
+
+az vm show \
+  --resource-group My-resource-group-name \
+  --name myVM \
+  --query "hardwareProfile" \
+  --output tsv
+```
+
+
 ## Static web app to Storage account and SSL certificate with Azure CDN
 
 1. Create storage account (general-purpose v2)

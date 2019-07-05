@@ -17,6 +17,8 @@
 const clone = myArray.slice(0)
 ```
 
+- The `map()` method creates a new array while the `forEach()` method executes a provided function once for each array element
+
 ## Command line
 - Create `package.json` with `npm init`
 - `npm up` # Update packages. Run also with `-g`
