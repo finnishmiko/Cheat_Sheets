@@ -11,6 +11,18 @@ Command | Description
 `docker logs CONTAINER --since 10m` | Fetch logs for last 10 minutes from container: 
 [`docker cp`](https://docs.docker.com/engine/reference/commandline/cp/) | Copy files to and from container
 
+F.ex:
+```
+docker cp ./filename.txt /tmp/
+docker logs -f CONTAINER
+```
+
+Go into the container
+```
+docker exec -it CONTAINER /bin/sh
+```
+
+
 ## Docker images
 
 ### Open TCP port for Docker in VM
