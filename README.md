@@ -61,3 +61,20 @@ ssh loginnametoserver
 # instead of 
 ssh loginnametoserver@test.server.com
 ```
+
+# DNS
+
+### Custom domain (`example.com`) to Azure web app
+
+```sh
+# DNS settings for example.com:
+
+# For root domain: example.com
+A @ IP address from Azure web app
+TXT @ exampleapp.azurewebsites.net
+
+# Subdomain www.example.com
+# CNAME record
+www
+exampleapp.azurewebsites.net
+```

@@ -74,3 +74,51 @@ If connection string username or password has `@`-character, it needs to be URL 
 mongodump --db test --collection collection
 mongorestore --collection collection --db test dump/
 ```
+
+## Mongoose
+
+Mongoose model includes Mongo's functions. To create a plain object use `.toObject()`
+
+#### Populate sub-sub-documents:
+
+```sh
+# Example:
+
+testObject = {
+	firstLevel: [secondObjectRef],
+	text
+}
+
+secondObject = {
+	secondLevel: thirdObjectRef
+}
+thirdObject = {
+	thirdLevel: thirdLevelDocument
+}
+
+# Populated object
+testObject = {
+	firstLevel: [
+		secondLevel: {
+			thirdLevel: thirdLevelDocument
+		}
+	],
+	text: 'test'
+}
+```
+
+Mongoose query with populate:
+
+```javascript
+const testObject = await TestObject.findOne({ text: test }).populate({
+  path: "firstLevel",
+  populate: {
+    model: "SecondObject",
+    path: "secondObject",
+    populate: {
+      model: "ThirdLevel",
+      path: "thirdLevel"
+    }
+  }
+});
+```
