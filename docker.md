@@ -60,7 +60,7 @@ Host mypage
 #
 ```
 
-## Removing old containers than are not in use
+## Removing old containers that are not in use
 ```
 docker image ls
 docker image prune
