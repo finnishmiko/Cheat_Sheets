@@ -64,6 +64,12 @@ var url = "mongodb://localhost/test";
 // With Docker local IP address is needed instead of localhost
 ```
 
+### Use volume with Mongo
+
+Local driver on Linux accepts options similar to the linux `mount` command.
+
+`docker volume create --driver local --opt type=none --opt device=/data/db --opt o=bind mongodb_volume`
+
 ---
 
 If connection string username or password has `@`-character, it needs to be URL encoded to `%40`.

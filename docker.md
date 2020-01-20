@@ -22,6 +22,10 @@ Go into the container
 docker exec -it CONTAINER /bin/sh
 ```
 
+Add source tag to the image:
+```sh
+docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE:new_tag_name_here
+```
 
 ## Docker images
 
@@ -31,6 +35,12 @@ docker exec -it CONTAINER /bin/sh
 [Service]
 ExecStart=
 ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
+```
+
+and run 
+```sh
+systemctl daemon-reload
+service docker restart
 ```
 
 ### SSH setup for docker images
