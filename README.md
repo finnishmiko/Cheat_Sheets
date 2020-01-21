@@ -47,6 +47,10 @@ more id_rsa.pub
 
 Add public key to Virtual Machine's `.ssh` folder `authorized_keys` file.
 
+```
+cat id_rsa.pub > ~\.ssh\authorized_keys
+```
+
 In local machine `.ssh` folder add file `config` with content:
 ```sh
 Host loginnametoserver
@@ -60,6 +64,15 @@ ssh loginnametoserver
 
 # instead of 
 ssh loginnametoserver@test.server.com
+```
+
+# SSH2 key conversion
+
+```sh
+ssh-keygen -i -f Identity.pub > sshpub
+
+# Word count should be 1
+wc sshpub
 ```
 
 # DNS

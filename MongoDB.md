@@ -64,15 +64,41 @@ var url = "mongodb://localhost/test";
 // With Docker local IP address is needed instead of localhost
 ```
 
+If connection string username or password has `@`-character, it needs to be URL encoded to `%40`.
+
+
 ### Use volume with Mongo
+
+Map volume to a local folder where Mongo's data would be stored if local Mongo were installed. In Ubuntu it is `/var/lib/mongodb`. 
 
 Local driver on Linux accepts options similar to the linux `mount` command.
 
-`docker volume create --driver local --opt type=none --opt device=/data/db --opt o=bind mongodb_volume`
+Docker command to create a volume:
+
+`docker volume create --driver local --opt type=none --opt device=/var/lib/mongodb --opt o=bind mongodb_volume`
+
+To .yml file volume is mapped to data folder inside Mongo container i.e. `/data/db`:
+
+```yml
+version: '3.1'
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - '27017:27017'
+    restart: always
+    volumes:
+      - mongodb_volume:/data/db
+volumes:
+  mongodb_volume:
+    external: true
+```
+
+Ports need not be opened unless access to DB is needed from outside of the stack. 
+
 
 ---
 
-If connection string username or password has `@`-character, it needs to be URL encoded to `%40`.
 
 ## Transfer database
 
