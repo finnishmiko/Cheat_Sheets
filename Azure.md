@@ -1,5 +1,28 @@
 # Azure
 
+## Web app with Kudu deployment
+
+There are two different setups to do it:
+1. Git repository is in /site/repository and then files are copied to /site/wwwroot with KuduSync.
+2. Git repository is in /site/wwwroot folder and no separate file copying is needed.
+  - This "deploying inplace" is done with env variable: SCM_REPOSITORY_PATH="wwwroot"
+  - This setup is needed f.ex. with Wordpress where php-files are modified during updates. Remember to add and commit these changes to the Git from Azure side.
+
+## Azure web app deployment slots 
+Note Windows server only at this moment.
+
+1. Add slot 'Staging' and clone settings from main app. This creates empty web app.
+  - Also add slot specific env variables to Azure Configuration. F.ex. WP_ENV="staging"
+2. Add Local Git repository from Azure Deployment Center
+3. Use this git as a remote called 'staging' in local development folder and push files to with `git push staging master`
+  - in case of Wordpress update permalinks twice at this point.
+
+Then do development with local and staging environments.
+
+When production site update is needed it can be done by swapping deployment slots. In case there are problems slots can be swapped back immediately.
+- Note that Wordpress may require permalink update thing...
+
+
 ## Create VM with Azure CLI
 
 ```
