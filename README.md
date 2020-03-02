@@ -23,6 +23,10 @@ $env:APP_BACKEND_URL="http://localhost:3001/api/0.01/"
 # Set env variable in Linux
 export APP_BACKEND_URL="http://localhost:3001/api/0.01/"
 
+# Set env variables to Apache server: 
+# Add following to .htaccess file and restart server
+SetEnv APP_BACKEND_URL http://localhost:3001/api/0.01/
+
 # Delete env variable
 Remove-Item Env:\APP_BACKEND_URL
 
