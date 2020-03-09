@@ -100,11 +100,42 @@ Ports need not be opened unless access to DB is needed from outside of the stack
 ---
 
 
-## Transfer database
+## Transfer database from Docker container
 
 ```sh
-mongodump --db test --collection collection
-mongorestore --collection collection --db test dump/
+### ssh into VM where MongoDB docker is run ###
+# Check host IP that is used with mongodump with parameter -h <IP>
+ip route
+# Create a folder for backups and give it needed premissions
+mkdir /tmp/backup
+chmod 777 /tmp/backup
+
+### From the local computer with ssh tunnel ###
+# Create a temporary Mongo container for running its mongodump command
+docker run -it --rm -v /tmp/backup/:/dump mongo mongodump --db <db name> -h 172.18.0.1
+
+# Restore DB
+mongorestore --db <db name> dump/
+```
+
+Bash script example using DB admin user
+`sudo su -`
+`bash backup_mongo_db.sh`
+```bash
+FILENAME=/tmp/backup-$(date '+%Y-%m-%d').tar.gz
+rm -rf /tmp/backup
+mkdir /tmp/backup
+chown 999 /tmp/backup
+docker run -it --rm -v /tmp/backup/:/dump mongo mongodump --db <db name> -u admin -p <password> -h 172.18.0.1 --authenticationDatabase=admin && \
+cd /tmp/backup && \
+tar cvfz $FILENAME <db name> && \
+rm -rf /tmp/backup
+# And finally copy file somewhere f.ex. to Azure Blob storage with azCopy
+# cron job can be used to schedule copying
+# sudo crontab -e
+# 0 5 * * * bash /root/backup_mongo_db.sh
+# sudo crontab -l
+
 ```
 
 ## Mongoose

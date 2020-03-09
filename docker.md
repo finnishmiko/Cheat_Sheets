@@ -2,10 +2,11 @@
 
 ## Commands
 
-- `docker ps`
+- `docker ps` aka. `docker container ls`
 - `docker ps -a`
 - `docker images`
 - `docker volume ls`
+- `docker service ls`
 
 | Command                                                                 | Description                                    |
 | ----------------------------------------------------------------------- | ---------------------------------------------- |
