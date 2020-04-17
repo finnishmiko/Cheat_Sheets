@@ -20,6 +20,11 @@ const clone = myArray.slice(0)
 
 - The `map()` method creates a new array while the `forEach()` method executes a provided function once for each array element
 
+- calculate sum with `reduce`. F.ex. total price from product objects:
+```JavaScript
+const totalPrice = myArray.reduce((currentValue, item) => currentValue + item.price, 0))
+```
+
 ## Command line
 
 - Create `package.json` with `npm init`

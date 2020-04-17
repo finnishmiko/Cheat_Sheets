@@ -185,3 +185,14 @@ const testObject = await TestObject.findOne({ text: test }).populate({
   }
 });
 ```
+
+### Query with $or operator
+
+Instead of looping items list and making one DB request at each round, create a query list with `map` and then find all from DB with one request with $or operator. F.ex.:
+
+```javascript
+const queryList = items.map((i: item) => {
+  return {inventory: i.inventory}
+})
+db.inventory.find( { $or: queryList } )
+```
