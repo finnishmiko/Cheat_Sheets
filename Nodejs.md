@@ -104,6 +104,30 @@ app.get("/", () => {});
 
 ## Promises
 
+Convert function to promise
+```ts
+export const promiseFunction = (inputId: string): Promise<{result: any}> => {
+  return new Promise((resolve, reject) => {
+    someService.exampleFunction(inputId, async (error: Error, result: any) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve({result});
+      }
+    })
+  });
+};
+
+// User that function in async route:
+try {
+  const {result} = await promiseFunction('exampleId');
+} catch (err) {
+  // handle error
+}
+```
+
+## Promises old
+
 https://developers.google.com/web/fundamentals/getting-started/primers/promises
 Creating a promise:
 
@@ -246,4 +270,12 @@ if (moduleAvailable("oracledb")) {
 } else {
   console.log("No OracleDB library installed");
 }
+```
+
+## Measure execution time
+
+```js
+console.time("testCode");
+// Code to test here
+console.timeEnd("testCode");
 ```

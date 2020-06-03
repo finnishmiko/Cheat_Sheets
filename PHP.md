@@ -1,5 +1,15 @@
 # PHP
 
+Measure load times:
+
+```php
+$starttime = microtime(true);
+// Code to test here
+$endtime = microtime(true);
+
+printf("Loading time %f seconds", $endtime - $starttime );
+```
+
 ```php
 /**
  * Add Basic Authentication to web page
