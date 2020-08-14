@@ -1,4 +1,35 @@
-# Wordpress Theme Development
+# Wordpress
+
+## Some often used functions
+
+Function | Definition
+---|---
+get_template_directory() | Retrieves template directory path for current theme
+get_stylesheet_directory() | As above but use this with Child theme
+
+## Implement some logic before Wordpress loads
+
+First file to load when page is accessed: `functions.php`.
+
+```php
+<?php
+/**
+ * If some function or check needs to be run at the beginning of page
+ * visit, it can be in different file and called at the beginning of
+ * functions.php:
+ */
+require get_template_directory() . '/inc/run-this-first.php';
+
+/**
+ * Some function can also be triggered with query parameter f.ex.:
+ * www.example.com?reload=all
+ */
+$reload_check = filter_input(INPUT_GET, 'reload', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+if ( $reload_check == 'all' ) {
+  // 
+}
+```
 
 ## Docker: Wordpress and database in separate containers
 
@@ -65,6 +96,73 @@ if ( file_exists($path . $config_file) ) {
 
 Duplicate DB for staging and update its `siteurl` and `home` settings from wp_options table.
 
+
+## Database connection examples in different environments
+
+```php
+/*
+  Example 1: Hard code connection info.
+  Can be used for testing in local MySQL database.
+*/
+$connectstr_dbhost = 'localhost';
+$connectstr_dbname = 'wp_databasename';
+$connectstr_dbusername = 'root';
+$connectstr_dbpassword = '';
+
+/*
+  Example 2: Use env variables for each variable.
+  These could be for Azure server for MySQL database.
+
+  In local WAMP-server set env variables to .htaccess file. F.ex:
+  SetEnv ENV_NAME env_value
+*/
+if ( getenv('connectstr_dbhost') ) {
+    $connectstr_dbhost = getenv('connectstr_dbhost');
+}
+if ( getenv('connectstr_dbname') ) {
+    $connectstr_dbname = getenv('connectstr_dbname');
+}
+if ( getenv('connectstr_dbusername') ) {
+    $connectstr_dbusername = getenv('connectstr_dbusername');
+}
+if ( getenv('connectstr_dbpassword') ) {
+    $connectstr_dbpassword = getenv('connectstr_dbpassword');
+}
+
+/*
+  Example 3: Use MySQL-type connection string with Azure Web App
+*/
+foreach ($_SERVER as $key => $value) {
+    if (strpos($key, "MYSQLCONNSTR_") !== 0) {
+        continue;
+    }
+    $connectstr_dbhost = preg_replace("/^.*Data Source=(.+?);.*$/", "\\1", $value);
+    $connectstr_dbname = preg_replace("/^.*Database=(.+?);.*$/", "\\1", $value);
+    $connectstr_dbusername = preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
+    $connectstr_dbpassword = preg_replace("/^.*Password=(.+?)$/", "\\1", $value);
+}
+
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define('DB_NAME', $connectstr_dbname);
+
+/** MySQL database username */
+define('DB_USER', $connectstr_dbusername);
+
+/** MySQL database password */
+define('DB_PASSWORD', $connectstr_dbpassword);
+
+/** MySQL hostname */
+define('DB_HOST', $connectstr_dbhost);
+
+/** Database Charset to use in creating database tables. */
+define('DB_CHARSET', 'utf8');
+
+/** The Database Collate type. Don't change this if in doubt. */
+define('DB_COLLATE', '');
+```
+
+
 ## Planning example:
 
 - SPA type front page with multiple sections and navigation between these parts
@@ -96,20 +194,6 @@ Duplicate DB for staging and update its `siteurl` and `home` settings from wp_op
 | `archive-customer.php` | `/customer`                       | List of Customer posts of some type, if specified                                            |
 | `comments.php`         | `/*`                              | Blog post commenting part                                                                    |
 
-## Create static HTML pages to show how the site should look like
-
-- `index.html` for front page
-- `customer.html` for customer page
-- `customer_story.html` for customer posts
-- `product.html` for product page
-- `blog.html` for blog page
-- `blog_post.html` for blog post
-- `style.css`
-- etc.
-- Include
-  - Bootstrap
-  - Font Awesome icons
-  - etc.
 
 ## Start Wordpress Theme development from scratch
 
