@@ -22,6 +22,14 @@ Then do development with local and staging environments.
 When production site update is needed it can be done by swapping deployment slots. In case there are problems slots can be swapped back immediately.
 - Note that Wordpress may require permalink update thing...
 
+__Note about web jobs:__ Web jobs are copied from production slot as is. So if there is some production site url dependent task, the web job in staging will still use production urls.
+
+## In-app MySQL
+
+Connection string can be found from Kudu: `D:\home\data\mysql\MYSQLCONNSTR_localdb.ini`
+
+PhpMyAdmin url is Kudu url/phpmyadmin f.ex.: `https://testwebsite.scm.azurewebsites.net/phpmyadmin`
+
 
 ## Create VM with Azure CLI
 
