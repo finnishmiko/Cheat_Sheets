@@ -84,6 +84,8 @@ wc sshpub
 ### Custom domain (`example.com`) to Azure web app
 
 ```sh
+# Add example.com to Azure web app custom domain list.
+
 # DNS settings for example.com:
 
 # For root domain: example.com
@@ -94,4 +96,39 @@ TXT @ exampleapp.azurewebsites.net
 # CNAME record
 www
 exampleapp.azurewebsites.net
+```
+
+### Other hosting companies
+
+Note that f.ex. One.com doesn't support custom domains that are not in One.com.
+
+
+# WAMP server
+
+Default setting is such that `C:\wamp64\www` folder is `http://localhost` and `C:\wamp64\www\project1` folder is `http://localhost/project1`.
+
+To change project address to `http://www.project1.test` following settings are needed.
+
+1. Edit hosts file in `C:\Windows\System32\drivers\etc\hosts` and add following line:
+
+```sh
+127.0.0.1 www.project.test
+
+# Existing setting in hosts file is:
+127.0.0.1 localhost
+```
+
+2. Then edit Apache's `httpd-vhosts.conf` file (can be accessed from Apache icon) and add following settings:
+
+```sh
+<VirtualHost *:80>
+  ServerName project1
+  ServerAlias www.project1.test
+  DocumentRoot "${INSTALL_DIR}/www/project1"
+  <Directory "${INSTALL_DIR}/www/project1/">
+    Options +Indexes +Includes +FollowSymLinks +MultiViews
+    AllowOverride All
+    Require local
+  </Directory>
+</VirtualHost>
 ```
