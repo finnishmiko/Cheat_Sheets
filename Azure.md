@@ -1,5 +1,21 @@
 # Azure
 
+## azcopy
+
+Add SAS-token to the commands.
+
+Sync all files and subfolders to blob storage:
+
+```PowerShell
+azcopy.exe sync '.\build' 'https://yourstorageaccountname.blob.core.windows.net/$web?sv=...'
+```
+
+Copy all files and subfolders to blob storage
+
+```PowerShell
+azcopy.exe copy '.\build\*' 'https://yourstorageaccountname.blob.core.windows.net/$web?sv=...' --recursive
+```
+
 ## Web app with Kudu deployment
 
 There are two different setups to do it:
