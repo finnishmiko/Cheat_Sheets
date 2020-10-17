@@ -132,3 +132,13 @@ To change project address to `http://www.project1.test` following settings are n
   </Directory>
 </VirtualHost>
 ```
+
+3. If some folder is outside the project root, alias can be created for it (to conf file above)
+
+```sh
+  Alias /static "${INSTALL_DIR}/www/build"
+  <Directory "${INSTALL_DIR}/www/build">
+    AllowOverride all
+    Require all granted
+  </Directory>
+```
