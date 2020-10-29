@@ -11,6 +11,7 @@
 * [PhoneGap](PhoneGap.md)
 * [Raspberry](Raspberry.md)
 * [React](React.md)
+* [SQL](SQL.md)
 * [Wordpress](Wordpress.md)
 
 
