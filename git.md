@@ -1,5 +1,17 @@
 # GIT
 
+## Remove file from Git
+
+... and from filesystem:
+```sh
+git rm filename.txt
+```
+
+... and keep it in filesystem:
+```sh
+git rm --cached filename.txt
+```
+
 ## Associate username and email to Git:
 ```sh
 git config --global user.name "My Name"
