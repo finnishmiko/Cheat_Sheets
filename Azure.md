@@ -16,6 +16,17 @@ Copy all files and subfolders to blob storage
 azcopy.exe copy '.\build\*' 'https://yourstorageaccountname.blob.core.windows.net/$web?sv=...' --recursive
 ```
 
+## Key Vault
+
+### CSR (certificate signing request)
+
+1. Go to Key Vault certificates tab and create .csr file from `Generate/import`.
+2. Send this file to CA for the request to get signed.
+3. Then bring .cer file back and `merge the Signed request` which enables the certificate.
+
+Now you can use this certificate f.ex. in Azure Web App. Go to `TLS/SSL settings` and from `Private key Certificates` use `Import Key Vault Certificate` button.
+
+
 ## Web app with Kudu deployment
 
 There are two different setups to do it:
