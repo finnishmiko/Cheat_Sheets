@@ -1,6 +1,7 @@
 # Cheat Sheets
 * [ATtiny13A](ATtiny13A.md)
 * [Azure](Azure.md)
+* [Craft](Craft.md)
 * [Docker](docker.md)
 * [ESP8266](ESP8266.md)
 * [Git](git.md)
@@ -12,6 +13,7 @@
 * [Raspberry](Raspberry.md)
 * [React](React.md)
 * [SQL](SQL.md)
+* [WCAG](WCAG.md)
 * [Wordpress](Wordpress.md)
 
 
