@@ -10,6 +10,7 @@
 * [Nodejs](Nodejs.md)
 * [PHP](PHP.md)
 * [PhoneGap](PhoneGap.md)
+* [Python](Python.md)
 * [Raspberry](Raspberry.md)
 * [React](React.md)
 * [SQL](SQL.md)
