@@ -19,4 +19,7 @@ pip freeze > requirements.txt
 # Install dependencies from requirements.txt
 pip install -r requirements.txt
 
+# Remove all libraries
+pip freeze | xargs pip uninstall -y
+
 ```
