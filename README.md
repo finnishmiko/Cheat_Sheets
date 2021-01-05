@@ -1,6 +1,7 @@
 # Cheat Sheets
 * [ATtiny13A](ATtiny13A.md)
 * [Azure](Azure.md)
+* [Chrome](Chrome.md)
 * [Craft](Craft.md)
 * [Docker](docker.md)
 * [ESP8266](ESP8266.md)
