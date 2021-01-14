@@ -1,13 +1,20 @@
 # Raspberry pi
 
 ## Linux commands
-* `ps -ef|grep node` # List Node processes
-* `cat <file name>` # View content of file
-* `head -20 <file name>` # View first 20 lines of file
 
+```sh
+# List Node processes
+ps -ef|grep node
+# View content of file
+cat <file name>
+# View first 20 lines of file
+head -20 <file name>
+```
 
 ## Memory card setup
+
 - Memory card formatting with Diskpart:
+
 ```sh
 diskpart
 list disk
@@ -22,14 +29,17 @@ list vol
 list par
 exit
 ```
-- Use __Win32 Disk Imager__ to copy image to SD card
 
+- Use **Win32 Disk Imager** to copy image to SD card
 
 ## Run node program at startup
+
 ```sh
 sudo nano /ect/rc.local
 ```
+
 Add following before `exit 0`
+
 ```sh
 sleep 60
 cd /home/pi/<program folder>
@@ -37,6 +47,7 @@ nodemon
 ```
 
 Check the running Node tasks
+
 ```sh
 ps -e|grep node
 ```
@@ -78,23 +89,23 @@ server {
 Then enable the file by creating a symbolic link:
 
 ```sh
-cd /etc/nginx/sites-enabled/ 
+cd /etc/nginx/sites-enabled/
 ln -s /etc/nginx/sites-available/yourdomain.com yourdomain.com
-````
+```
 
 Test for syntax mistakes:
+
 ```sh
 nginx -t
 ```
 
 Restart Nginx:
+
 ```sh
 sudo /etc/init.d/nginx restart
 ```
 
 Lastly start the node server.
-
-
 
 ## Copy files to and from server
 
@@ -104,4 +115,15 @@ scp username@source:/location/to/file username@destination:/where/to/put
 
 F.ex. copy a file from Raspberry to a local machine.
 
-`scp username@192.168.1.2:/home/pi/project/file.txt /c/project`
+```sh
+scp username@192.168.1.2:/home/pi/project/file.txt /c/project
+```
+
+F.ex. copy file from current colder to Raspberry.
+
+```sh
+scp ./* username@192.168.1.2:/home/pi/project
+
+# Or if the connection is saved to .ssh/config:
+scp ./* loginnametoserver:/home/pi/project
+```

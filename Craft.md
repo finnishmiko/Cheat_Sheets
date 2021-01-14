@@ -12,3 +12,9 @@ F.ex. Generate security key or app_id:
 php craft setup/security-key
 php craft setup/app-id
 ```
+Commands for migration and project config after staging update:
+
+```sh
+./craft migrate/all
+./craft project-config/apply --force
+```

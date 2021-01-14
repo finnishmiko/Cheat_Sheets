@@ -11,3 +11,9 @@ SELECT * FROM tablename;
 DELETE FROM tablename WHERE id=1;
 QUIT
 ```
+
+Query example to find text with the substring:
+
+```SQL
+SELECT * FROM databasename.tablename WHERE Address LIKE "%substr1/%" OR Address LIKE "%substr2%";
+```
