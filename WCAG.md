@@ -1,5 +1,9 @@
 # [Web Content Accessibility Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 
+## 1.4.1 Use of color
+
+- Contrast ratio of 3:1 with surrounding text and providing additional visual cues on focus for links.
+
 ## 1.4.3 Contrast
 
 - At least 4.5:1
