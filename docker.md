@@ -15,10 +15,16 @@
 
 F.ex:
 
-```
+```sh
 docker cp ./filename.txt ImageName:/tmp/
 
 docker logs -f CONTAINER
+
+# Save log to file
+docker logs -f CONTAINER &> logname.log &
+# -f is same as --follow and it writes all existing logs and continues logging afterwards.
+# &> redirects both the standard output and standard error.
+# last & runs the method in the background.
 ```
 
 Go into the container
@@ -155,10 +161,10 @@ If there are backend and frontend images in VM in ports 8088 and 8080 then Nginx
 
 # Docker volumes in Windows
 
-To use Docker volumes in Windows local admin rights are needed. If normally log in is done with AzureAD account then separate local admin account is needed:
+To use Docker volumes in Windows local admin rights are needed. If normally login is done with AzureAD account then separate local admin account is needed:
 
 - Windows settings: Create DockerAdmin local admin account with Administrator priviledges
-- Log in and logout to DockerAdmin
+- Login and logout to DockerAdmin
 - Share the required folder from AzureAD account to DockerAdmin. Read/write access is needed
 - Docker settings \ Shared Drives select drive C and login with DockerAdmin account
 
