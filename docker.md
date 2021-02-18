@@ -25,6 +25,8 @@ docker logs -f CONTAINER &> logname.log &
 # -f is same as --follow and it writes all existing logs and continues logging afterwards.
 # &> redirects both the standard output and standard error.
 # last & runs the method in the background.
+
+docker service logs SERVICE
 ```
 
 Go into the container
