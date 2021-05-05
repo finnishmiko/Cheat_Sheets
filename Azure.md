@@ -16,6 +16,14 @@ Copy all files and subfolders to blob storage
 azcopy.exe copy '.\build\*' 'https://yourstorageaccountname.blob.core.windows.net/$web?sv=...' --recursive
 ```
 
+## Kudu Powershell
+
+Calculate size of uploads folder and subfolders
+
+```PowerShell
+"{0} MB" -f ((Get-ChildItem uploads\ -Recurse | Measure-Object -Property Length -Sum -ErrorAction Stop).Sum / 1MB)
+```
+
 ## Key Vault
 
 ### CSR (certificate signing request)
