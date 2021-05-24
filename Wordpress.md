@@ -1,5 +1,14 @@
 # Wordpress
 
+## DevOps pipeline
+
+To prevent /uploads folder removal during site update add to Azure Service deploy task additional argument: 
+
+```
+-skip:Directory=\\back 
+```
+
+
 ## Some often used functions
 
 Function | Definition
