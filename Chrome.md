@@ -5,4 +5,4 @@
 
 # NFC in Android
 
-Enable `#experimental-web-platform-features` from `chrome://flags`.
+Enable `#experimental-web-platform-features` and `WebNFC` from `chrome://flags`.
