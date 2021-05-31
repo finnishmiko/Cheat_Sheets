@@ -2,11 +2,42 @@
 
 ## DevOps pipeline
 
-To prevent /uploads folder removal during site update add to Azure Service deploy task additional argument: 
+To prevent /uploads folder removal during site update add to Azure App Service deploy task additional argument: 
 
 ```
--skip:Directory=\\back 
+-skip:Directory=\\wp-content\\uploads
 ```
+
+## Create custom block with @wordpress/create-block
+
+Install library:
+
+```
+npm i -D @wordpress/create-block
+```
+
+Create new plugin:
+
+```
+npm i @wordpress/create-block
+cd wordpress/wp-content/plugins
+npx @wordpress/create-block my-card-block
+cd my-card-block
+npm start
+```
+
+Go to wp-admin and enable plugin that was just created. Then the block is awailable via block editor.
+
+
+### Attribute types
+
+- null
+- boolean
+- object
+- array
+- number
+- string
+- integer
 
 
 ## Some often used functions
