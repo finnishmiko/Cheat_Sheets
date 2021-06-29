@@ -18,3 +18,9 @@ Commands for migration and project config after staging update:
 ./craft migrate/all
 ./craft project-config/apply --force
 ```
+
+Rebuild search indexes:
+
+```sh
+php craft resave/entries --update-search-index
+```
