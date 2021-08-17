@@ -104,6 +104,33 @@ app.get("/", () => {});
 
 ## Promises
 
+### Get apiKey or some other string:
+
+Get the string from cache if it exists of find it's value with some function.
+
+```ts
+let testString: string | undefined;
+export async function getTestString(): Promise<string> {
+	if (!testString) {
+		testString = await functionToGetString(parameters);
+	}
+	return testString;
+}
+```
+
+Or even better solution is to return promise string. This makes sure the function to get the string is only run once even if the getTestString() is called twice in succession (before first run is ready).
+
+```ts
+let testStringPromise: Promise<string> | undefined;
+export function getTestString(): Promise<string> {
+	if (!testStringPromise) {
+		testStringPromise = functionToGetString(parameters);
+	}
+	return testStringPromise;
+}
+```
+
+
 Convert function to promise
 ```ts
 export const promiseFunction = (inputId: string): Promise<{result: any}> => {
