@@ -35,6 +35,24 @@ db.collection.findOneAndUpdate(
 )
 ```
 
+### Robo 3T
+
+Find items that have a value in search list:
+
+```sh
+db.getCollection('locations').find({ name: { $in:["Location 1", "Location 2"] } })
+```
+
+Then update those items with some change:
+
+```sh
+db.getCollection('locations').update(
+   {name: { $in:["Location 1", "Location 2"] }},
+   { $set: {"street": "Address 1" }},
+   { upsert: false, multi: true }
+)
+```
+
 ---
 
 ### Docker Mongo
