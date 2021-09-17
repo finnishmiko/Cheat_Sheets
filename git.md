@@ -12,6 +12,34 @@ git rm filename.txt
 git rm --cached filename.txt
 ```
 
+## Remove folder with large files from accidentally pushed to Git repository. 
+
+```PowerShell
+# check size
+git count-objects -vH
+
+# Iterate through all references on current branch (--tree-filter), running the command in quotes. Delete useless commits recursively (--prune-empty).
+git filter-branch --tree-filter "rm -rf ./path/to/folder" --prune-empty HEAD
+
+# Delete the reference to that old branch.
+git for-each-ref --format="%(refname)" refs/original/ | foreach-object -process { git update-ref -d $_ }
+
+# clean
+git gc
+
+# push with force
+git push origin master --force
+
+# Note that others using the repository need to clone it again.
+# Also note that this solution reduces local Git size only after the repository is cloned again.
+git clone <repository>
+
+# check size
+git count-objects -vH
+
+```
+
+
 ## Associate username and email to Git:
 ```sh
 git config --global user.name "My Name"
@@ -140,6 +168,14 @@ Aborting
 ## Save Git log history to a text file
 ```sh
 git --no-pager log > log.txt
+```
+
+```sh
+# Display hash + comment in one line
+git log --pretty=oneline
+
+# Display changed filenames
+git log --name-only
 ```
 
 ## Detached HEAD state
