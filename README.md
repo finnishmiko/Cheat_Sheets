@@ -7,6 +7,7 @@
 * [ESP8266](ESP8266.md)
 * [Git](git.md)
 * [Java](Java.md)
+* [Linux](Linux.md)
 * [MongoDB](MongoDB.md)
 * [Nodejs](Nodejs.md)
 * [PHP](PHP.md)
@@ -146,4 +147,26 @@ To change project address to `http://www.project1.test` following settings are n
     AllowOverride all
     Require all granted
   </Directory>
+```
+
+# PowerShell commands
+
+```powershell
+nslookup -type=TXT test.com
+
+Get-NetIPAddress
+
+TRACERT.EXE 192.168.1.1
+```
+
+```PowerShell
+(Get-ChildItem -Path c:\pstbak\*.* -Filter *.pst | ? {
+  $_.LastWriteTime -gt (Get-Date).AddDays(-3) 
+}).Count
+```
+
+```PowerShell
+(Get-ChildItem -Path *.* -Filter *.pst | ? { $_.LastWriteTime -gt (Get-Date).AddDays(-1) }).Count
+
+Get-ChildItem -Path . -Recurse| ? {$_.LastWriteTime -gt (Get-Date).AddDays(-4)}
 ```
