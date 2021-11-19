@@ -39,6 +39,12 @@ git count-objects -vH
 
 ```
 
+## Get only changed files from repository to local zip file
+
+```bash
+# Note: this works only on linux based shell
+git archive --output=../latest_changes.zip HEAD $(git diff --name-only HEAD HEAD^1) 
+```
 
 ## Associate username and email to Git:
 ```sh
