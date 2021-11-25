@@ -1,8 +1,10 @@
 # [Web Content Accessibility Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 
+## [Web accessibility evaluation tool WAVE](https://wave.webaim.org/)
+
 ## [Windows Narrator screen reader](https://support.microsoft.com/fi-fi/windows/lukijan-t%C3%A4ydellinen-opas-e4397a0d-ef4f-b386-d8ae-c172f109bdb1#WindowsVersion=Windows_10)
 
-- start: WIN + CTRL + Enter 
+- start: WIN + CTRL + Enter
 - Reader button: Caps Lock
 - Hyper links and image descriptions: Reader + CTRL + D
 - Summary: Reader + S
@@ -26,6 +28,14 @@ Large tex: >18pt or >14pt bold
 - 18pt ~ 24px
 
 Contrast ratio of 3:1 is needed with surrounding text. But color alone is not enough to convey information so additional visual cue on focus like underline or font change etc. is needed for links and controls.
+
+## 1.4.4 Resize text
+
+Except for captions and images of text, text can be resized without assistive technology up to 200 percent without loss of content or functionality.
+
+## 1.4.10 Reflow
+
+The objective of this technique is to be able to present content without introducing a horizontal scroll bar at a width equivalent to 320 CSS pixels.
 
 ## Alt-text
 
