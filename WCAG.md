@@ -47,3 +47,13 @@ The objective of this technique is to be able to present content without introdu
 A link can be triggered with the enter key but not with space. It will redirect you to a new page or a section within the same page.
 
 A button can be triggered with the space or enter key. It will trigger an action like opening or closing something, or send a form.
+
+## Error: select missing label
+
+Assistive technology requires select to be labelled. There are multiple ways to achieve this:
+
+```html
+<label for="select-id">
+<select aria-label="Label here">
+<select aria-labelledby="id-of-other-label-element">
+```
