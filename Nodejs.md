@@ -21,6 +21,7 @@ const clone = myArray.slice(0)
 - The `map()` method creates a new array while the `forEach()` method executes a provided function once for each array element
 
 - calculate sum with `reduce`. F.ex. total price from product objects:
+
 ```JavaScript
 const totalPrice = myArray.reduce((currentValue, item) => currentValue + item.price, 0))
 ```
@@ -36,6 +37,24 @@ const totalPrice = myArray.reduce((currentValue, item) => currentValue + item.pr
 ```
 npm remove package
 npm i --save package
+```
+
+### Arguments
+
+Read arguments with:
+
+```JavaScript
+// args is stging[]
+const args = process.argv.slice(2);
+```
+
+```bash
+# Add arguments to 'npm run' command.
+# Note the space after --:
+npm run <command> [-- <args>]
+
+# Add arguments to node command:
+node [options] script.js [args]
 ```
 
 ## Run Node server in Docker
@@ -88,7 +107,7 @@ if (typeof variable === "undefined" || variable === null) {
 ## Check if object with `id:'10'` is in object array
 
 ```javascript
-objectArray.find(o => o.id === "10");
+objectArray.find((o) => o.id === "10");
 // Returns the value of first element in the array that satisfies the testing function
 // Otherwise undefined is returned
 ```
@@ -96,7 +115,7 @@ objectArray.find(o => o.id === "10");
 ## ES6-syntax
 
 ```javascript
-app.get("/", function() {});
+app.get("/", function () {});
 
 //is same as ES6-syntax:
 app.get("/", () => {});
@@ -111,10 +130,10 @@ Get the string from cache if it exists of find it's value with some function.
 ```ts
 let testString: string | undefined;
 export async function getTestString(): Promise<string> {
-	if (!testString) {
-		testString = await functionToGetString(parameters);
-	}
-	return testString;
+  if (!testString) {
+    testString = await functionToGetString(parameters);
+  }
+  return testString;
 }
 ```
 
@@ -123,31 +142,31 @@ Or even better solution is to return promise string. This makes sure the functio
 ```ts
 let testStringPromise: Promise<string> | undefined;
 export function getTestString(): Promise<string> {
-	if (!testStringPromise) {
-		testStringPromise = functionToGetString(parameters);
-	}
-	return testStringPromise;
+  if (!testStringPromise) {
+    testStringPromise = functionToGetString(parameters);
+  }
+  return testStringPromise;
 }
 ```
 
-
 Convert function to promise
+
 ```ts
-export const promiseFunction = (inputId: string): Promise<{result: any}> => {
+export const promiseFunction = (inputId: string): Promise<{ result: any }> => {
   return new Promise((resolve, reject) => {
     someService.exampleFunction(inputId, async (error: Error, result: any) => {
       if (error) {
         reject(error);
       } else {
-        resolve({result});
+        resolve({ result });
       }
-    })
+    });
   });
 };
 
 // User that function in async route:
 try {
-  const {result} = await promiseFunction('exampleId');
+  const { result } = await promiseFunction("exampleId");
 } catch (err) {
   // handle error
 }
@@ -175,10 +194,10 @@ Using that promise:
 
 ```js
 promise.then(
-  function(result) {
+  function (result) {
     console.log(result); // "Stuff worked!"
   },
-  function(err) {
+  function (err) {
     console.log(err); // Error: "It broke"
   }
 );
@@ -189,8 +208,8 @@ https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
 ```javascript
 function step1() {
   console.log("step1(): start");
-  return new Promise(function(resolve) {
-    setTimeout(function() {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
       console.log("step1(): end");
       resolve();
     }, 1000);
@@ -199,8 +218,8 @@ function step1() {
 
 function step2() {
   console.log("step2(): start");
-  return new Promise(function(resolve) {
-    setTimeout(function() {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
       console.log("step2(): end");
       resolve();
     }, 1000);
@@ -209,8 +228,8 @@ function step2() {
 
 function step3() {
   console.log("step3(): start");
-  return new Promise(function(resolve) {
-    setTimeout(function() {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
       console.log("step3(): end");
       resolve();
     }, 1000);
@@ -218,9 +237,7 @@ function step3() {
 }
 
 function example() {
-  step1()
-    .then(step2)
-    .then(step3);
+  step1().then(step2).then(step3);
 }
 ```
 
@@ -264,7 +281,7 @@ var items = [1, 2, 3, 4, 5];
 
 // Sample async action
 var fn = function asyncMultiplyBy2(v) {
-  return new Promise(resolve => setTimeout(() => resolve(v * 2), 100));
+  return new Promise((resolve) => setTimeout(() => resolve(v * 2), 100));
 };
 
 // Run the function over all items and create a promises array
@@ -275,7 +292,7 @@ var results = Promise.all(actions);
 
 // Check results
 results.then(
-  data => console.log(data) // [2, 4, 6, 8, 10]
+  (data) => console.log(data) // [2, 4, 6, 8, 10]
 );
 ```
 
