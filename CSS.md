@@ -1,6 +1,7 @@
 # CSS
 
 Customize scroll bar.
+Note that this doesn't work in iPhone.
 
 ```
 ::-webkit-scrollbar {

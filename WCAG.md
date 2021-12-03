@@ -53,7 +53,23 @@ A button can be triggered with the space or enter key. It will trigger an action
 Assistive technology requires select to be labelled. There are multiple ways to achieve this:
 
 ```html
-<label for="select-id">
-<select aria-label="Label here">
-<select aria-labelledby="id-of-other-label-element">
+<label for="select-id" />
+<select aria-label="Label here" />
+<select aria-labelledby="id-of-other-label-element" />
+```
+
+## Error: Empty link
+
+A link contains no text. It is needed to determine link's purpose (2.4.4 Link Purpose).
+
+Solutions:
+
+```html
+<!-- Add aria-label -->
+<a href="https://example.com" aria-label="first link"
+  ><i class="myclass"></i
+></a>
+
+<!-- Add screen reader only span element: -->
+<span class="sr-only">Visit example.com</span>
 ```
