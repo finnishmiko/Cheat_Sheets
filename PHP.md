@@ -20,6 +20,15 @@ function JsonEncode($data) {
 	}
 	return $output;
 }
+
+/** Wrapper to check if operation fails */
+function fileGetContents($fileName) {
+	$output = file_get_contents($fileName);
+	if ($output == false) {
+		throw new \Exception('File get contents exception');
+	}
+	return $output;
+}
 ```
 
 ## Unit-tests with PHPUnit
