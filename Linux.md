@@ -6,6 +6,11 @@ Check an SSL connection and certificate:
 echo | openssl s_client -servername www.domaintocheck.fi -connect www.domaintocheck.fi:443 -showcerts| openssl x509 -noout -dates
 ```
 
+Local IP address:
+```bash
+hostname -I
+```
+
 Check the kernel version:
 ```bash
 uname -r

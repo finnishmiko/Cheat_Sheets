@@ -1,5 +1,23 @@
 # Azure
 
+* [azcopy](#azcopy)
+* [Kudu Powershell](#Kudu-Powershell)
+* [Key Vault](#Key-Vault)
+  * [CSR (certificate signing request)](#CSR-(certificate-signing-request))
+  * [Renew a nonintegrated CA certificate](#Renew-a-nonintegrated-CA-certificate)
+* [Web app with Kudu deployment](#Web-app-with-Kudu-deployment)
+* [Azure web app deployment slots](#Azure-web-app-deployment-slots)
+* [In-app MySQL](#In-app-MySQL)
+* [Create VM with Azure CLI](#Create-VM-with-Azure-CLI)
+* [Settings file example](#Settings-file-example)
+  * [configure-iis.ps1](#configure-iis.ps1)
+* [Open port](#Open-port)
+* [Resize VM](#Resize-VM)
+* [Static web app to Storage account and SSL certificate with Azure CDN](#Static-web-app-to-Storage-account-and-SSL-certificate-with-Azure-CDN)
+* [Deploy React Web App from local Git repository](#Deploy-React-Web-App-from-local-Git-repository)
+* [Chrome console says it can't load `manifest.json` file](#Chrome-console-says-it-can't-load-`manifest.json`-file)
+* [Deploy Node Express Web App from local Git repository](#Deploy-Node-Express-Web-App-from-local-Git-repository)
+
 ## azcopy
 
 Add SAS-token to the commands.
@@ -34,6 +52,14 @@ Calculate size of uploads folder and subfolders
 
 Now you can use this certificate f.ex. in Azure Web App. Go to `TLS/SSL settings` and from `Private key Certificates` use `Import Key Vault Certificate` button.
 
+### Renew a nonintegrated CA certificate
+
+1. From the Key vault Certificates tab open the certificate.
+2. Click New Version button and then Create.
+3. From the Certificate Operation tab CSR-file can be downloaded. Send this to CA for signing.
+4. When you get .cer file back use Merge Signed Request option.
+
+If the old certificate is not expired yet, it will be used until expiry. This even when the Azure shows that the current version is the newer certificate.
 
 ## Web app with Kudu deployment
 
@@ -43,7 +69,7 @@ There are two different setups to do it:
   - This "deploying inplace" is done with env variable: SCM_REPOSITORY_PATH="wwwroot"
   - This setup is needed f.ex. with Wordpress where php-files are modified during updates. Remember to add and commit these changes to the Git from Azure side.
 
-## Azure web app deployment slots 
+## Azure web app deployment slots
 Note Windows server only at this moment.
 
 1. Add slot 'Staging' and clone settings from main app. This creates empty web app.

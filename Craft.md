@@ -12,6 +12,7 @@ F.ex. Generate security key or app_id:
 php craft setup/security-key
 php craft setup/app-id
 ```
+
 Commands for migration and project config after staging update:
 
 ```sh
@@ -23,4 +24,12 @@ Rebuild search indexes:
 
 ```sh
 php craft resave/entries --update-search-index
+```
+
+## Snippets
+
+Get current entry's top level ancestor:
+
+```twig
+{% set rootEntry = entry.getAncestors().first() %}
 ```
