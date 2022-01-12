@@ -8,6 +8,7 @@
 * [ESP8266](ESP8266.md)
 * [Git](git.md)
 * [Java](Java.md)
+* [JavaScript](JavaScript.md)
 * [Linux](Linux.md)
 * [MongoDB](MongoDB.md)
 * [Nodejs](Nodejs.md)
