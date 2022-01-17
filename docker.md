@@ -51,6 +51,14 @@ docker container ls
 docker container prune
 ```
 
+# VS Code devcontainer
+
+Error while opening devcontainer from DevOps repository: "Cannot determine the organization name for this 'dev.azure.com' remote url". Following setting fixed it:
+
+```PowerShell
+git config --global credential.useHttpPath true
+```
+
 # Use local Docker to control Docker in VM:
 
 ### Open TCP port for Docker in VM

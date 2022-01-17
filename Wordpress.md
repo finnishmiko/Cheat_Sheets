@@ -1,8 +1,10 @@
 # Wordpress
 
+There seems to be bots trying to log in with real admin name. One fix is to change `user_nicename` in database to something else. That is used as user's slug. F.ex. to find user's posts slug is used lit this: `mysite.com/author/<user_slug>`.
+
 ## DevOps pipeline
 
-To prevent /uploads folder removal during site update add to Azure App Service deploy task additional argument: 
+To prevent /uploads folder removal during site update add to Azure App Service deploy task additional argument:
 
 ```
 -skip:Directory=\\wp-content\\uploads
@@ -28,7 +30,6 @@ npm start
 
 Go to wp-admin and enable plugin that was just created. Then the block is awailable via block editor.
 
-
 ### Attribute types
 
 - null
@@ -39,13 +40,12 @@ Go to wp-admin and enable plugin that was just created. Then the block is awaila
 - string
 - integer
 
-
 ## Some often used functions
 
-Function | Definition
----|---
-get_template_directory() | Retrieves template directory path for current theme
-get_stylesheet_directory() | As above but use this with Child theme
+| Function                   | Definition                                          |
+| -------------------------- | --------------------------------------------------- |
+| get_template_directory()   | Retrieves template directory path for current theme |
+| get_stylesheet_directory() | As above but use this with Child theme              |
 
 ## Implement some logic before Wordpress loads
 
@@ -67,7 +67,7 @@ require get_template_directory() . '/inc/run-this-first.php';
 $reload_check = filter_input(INPUT_GET, 'reload', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 if ( $reload_check == 'all' ) {
-  // 
+  //
 }
 ```
 
@@ -136,7 +136,6 @@ if ( file_exists($path . $config_file) ) {
 
 Duplicate DB for staging and update its `siteurl` and `home` settings from wp_options table.
 
-
 ## Database connection examples in different environments
 
 ```php
@@ -202,7 +201,6 @@ define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 ```
 
-
 ## Planning example:
 
 - SPA type front page with multiple sections and navigation between these parts
@@ -233,7 +231,6 @@ define('DB_COLLATE', '');
 | `archive.php`          | `/category/<category-X>`          | List all posts of some category or tag or time etc.                                          |
 | `archive-customer.php` | `/customer`                       | List of Customer posts of some type, if specified                                            |
 | `comments.php`         | `/*`                              | Blog post commenting part                                                                    |
-
 
 ## Start Wordpress Theme development from scratch
 
