@@ -31,3 +31,15 @@ docker cp "..............dump-db.sql" $MariaDBInstance":/tmp/databasedump"
 
 docker exec -i $MariaDBInstance /bin/bash -c "cat /tmp/databasedump | mysql -u mariadb --password=mariadb mariadb && rm /tmp/databasedump"
 ```
+
+Change wp_options table's home and siteurl values to devcontainer's url:
+
+```powershell
+docker exec -it $MariaDBInstance mysql -u username --password=password
+
+SELECT * FROM wp_options WHERE option_name = 'home';
+UPDATE wp_options SET option_value="http://localhost:8080" WHERE option_name = "home";
+
+SELECT * FROM wp_options WHERE option_name = 'siteurl';
+UPDATE wp_options SET option_value="http://localhost:8080" WHERE option_name = "siteurl";
+```

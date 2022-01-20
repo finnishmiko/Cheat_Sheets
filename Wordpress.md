@@ -73,6 +73,12 @@ if ( $reload_check == 'all' ) {
 
 ## Docker: Wordpress and database in separate containers
 
+Wordpress uploads folder
+Copy production site's uploads-folder content to Docker container's volume:
+
+docker cp uploads/ project_devcontainer_wp_app_1:/workspaces/project-wordpress/wordpress/wp-content
+
+
 New Wordpress
 
 ```sh
