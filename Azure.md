@@ -248,6 +248,8 @@ git commit -m "Initial Azure commit"
    `git push azure master`
 
 - You will be prompted for the username and password created earlier.
+- If you want to push other branch than master:
+  `git push azure master:dev`
 
 6. Visit your app at `webappname.azurewebsites.net`
 

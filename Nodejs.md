@@ -10,6 +10,12 @@
 - [ForEach-loop with promises](#ForEach-loop-with-promises)
 - [Check if some library is installed](#Check-if-some-library-is-installed)
 
+## Node Js project
+
+```JavaScript
+npm audit
+```
+
 ## JavaScript
 
 - Clone contents of an array:
