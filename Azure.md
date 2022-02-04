@@ -1,5 +1,6 @@
 # Azure
 
+- [Tenant](#Tenant)
 - [azcopy](#azcopy)
 - [Kudu Powershell](#Kudu-Powershell)
 - [Key Vault](#Key-Vault)
@@ -17,6 +18,13 @@
 - [Deploy React Web App from local Git repository](#Deploy-React-Web-App-from-local-Git-repository)
 - [Chrome console says it can't load `manifest.json` file](#Chrome-console-says-it-can't-load-`manifest.json`-file)
 - [Deploy Node Express Web App from local Git repository](#Deploy-Node-Express-Web-App-from-local-Git-repository)
+
+## Tenant
+
+- A tenant represents an organisation
+- It's an instance of Azure AD.
+- In the AAD tenant apps are registered and managed and their access to data is configured.
+- First user account in tenant has role Global admin.
 
 ## azcopy
 
