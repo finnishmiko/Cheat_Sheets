@@ -1,5 +1,8 @@
 # [MySQL](https://dev.mysql.com/doc/mysql-getting-started/en/)
 
+Azure database for MySQL default collation: latin1_swedish_ci
+Change it to utf8_unicode_ci for Wordpress use.
+
 ```
 docker exec -it mariadb_container_name mysql -u username --password=password
 

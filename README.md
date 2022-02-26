@@ -1,26 +1,26 @@
 # Cheat Sheets
-* [ATtiny13A](ATtiny13A.md)
-* [Azure](Azure.md)
-* [Chrome](Chrome.md)
-* [Craft](Craft.md)
-* [CSS](CSS.md)
-* [Docker](docker.md)
-* [ESP8266](ESP8266.md)
-* [Git](git.md)
-* [Java](Java.md)
-* [JavaScript](JavaScript.md)
-* [Linux](Linux.md)
-* [MongoDB](MongoDB.md)
-* [Nodejs](Nodejs.md)
-* [PHP](PHP.md)
-* [PhoneGap](PhoneGap.md)
-* [Python](Python.md)
-* [Raspberry](Raspberry.md)
-* [React](React.md)
-* [SQL](SQL.md)
-* [WCAG](WCAG.md)
-* [Wordpress](Wordpress.md)
 
+- [ATtiny13A](ATtiny13A.md)
+- [Azure](Azure.md)
+- [Chrome](Chrome.md)
+- [Craft](Craft.md)
+- [CSS](CSS.md)
+- [Docker](docker.md)
+- [ESP8266](ESP8266.md)
+- [Git](git.md)
+- [Java](Java.md)
+- [JavaScript](JavaScript.md)
+- [Linux](Linux.md)
+- [MongoDB](MongoDB.md)
+- [Nodejs](Nodejs.md)
+- [PHP](PHP.md)
+- [PhoneGap](PhoneGap.md)
+- [Python](Python.md)
+- [Raspberry](Raspberry.md)
+- [React](React.md)
+- [SQL](SQL.md)
+- [WCAG](WCAG.md)
+- [Wordpress](Wordpress.md)
 
 # Env variables
 
@@ -31,7 +31,7 @@ $env:APP_BACKEND_URL="http://localhost:3001/api/0.01/"
 # Set env variable in Linux
 export APP_BACKEND_URL="http://localhost:3001/api/0.01/"
 
-# Set env variables to Apache server: 
+# Set env variables to Apache server:
 # Add following to .htaccess file and restart server
 SetEnv APP_BACKEND_URL http://localhost:3001/api/0.01/
 
@@ -64,6 +64,7 @@ cat id_rsa.pub > ~\.ssh\authorized_keys
 ```
 
 In local machine `.ssh` folder add file `config` with content:
+
 ```sh
 Host loginnametoserver
 	User loginnametoserver
@@ -71,10 +72,10 @@ Host loginnametoserver
 ```
 
 ```sh
-# Now you can login to VM with 
+# Now you can login to VM with
 ssh loginnametoserver
 
-# instead of 
+# instead of
 ssh loginnametoserver@test.server.com
 ```
 
@@ -88,6 +89,8 @@ wc sshpub
 ```
 
 # DNS
+
+Note that it can take up to 48 hours for the DNS entry changes to propagate. That happened with Elisa and after 48h they saved the record again and it worked in 15 minutes.
 
 ### Custom domain (`example.com`) to Azure web app
 
@@ -109,7 +112,6 @@ exampleapp.azurewebsites.net
 ### Other hosting companies
 
 Note that f.ex. One.com doesn't support custom domains that are not in One.com.
-
 
 # WAMP server
 
@@ -153,17 +155,26 @@ To change project address to `http://www.project1.test` following settings are n
 
 # PowerShell commands
 
+Check DNS-records:
+
 ```powershell
 nslookup -type=TXT test.com
+nslookup -type=CNAME test.com
+nslookup -type=A test.com
 
+Resolve-DnsName test.com
+```
+
+```powershell
 Get-NetIPAddress
 
 TRACERT.EXE 192.168.1.1
+
 ```
 
 ```PowerShell
 (Get-ChildItem -Path c:\pstbak\*.* -Filter *.pst | ? {
-  $_.LastWriteTime -gt (Get-Date).AddDays(-3) 
+  $_.LastWriteTime -gt (Get-Date).AddDays(-3)
 }).Count
 ```
 

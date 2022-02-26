@@ -1,5 +1,11 @@
 # [Get started with Docker](https://docs.docker.com/get-started/)
 
+- [VS Code devcontainer](#VS-Code-devcontainer)
+- [Use local Docker to control Docker in VM](#Use-local-Docker-to-control-Docker-in-VM)
+- [Stack deployment](#Stack-deployment)
+- [Docker volumes in Windows](#Docker-volumes-in-Windows)
+- [Containers](#Containers)
+
 ## Commands
 
 - `docker ps` aka. `docker container ls`
@@ -53,11 +59,15 @@ docker container prune
 
 # VS Code devcontainer
 
-Error while opening devcontainer from DevOps repository: "Cannot determine the organization name for this 'dev.azure.com' remote url". Following setting fixed it:
+1) Error while opening devcontainer from DevOps repository: "Cannot determine the organization name for this 'dev.azure.com' remote url". Following setting fixed it:
 
 ```PowerShell
 git config --global credential.useHttpPath true
 ```
+
+2) Connection refused when connecting from one devcontainer to another
+
+F.ex. case where backend is in different devcontainer than frontend.
 
 # Use local Docker to control Docker in VM:
 
