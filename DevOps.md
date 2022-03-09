@@ -26,3 +26,14 @@ Note: These might not be minimum roles but these are enough roles.
 - DevOps: Project administrator
 - Subscription: Owner
 - AAD directory role: Global administrator or maybe Application developer is enough
+
+## External developers to selected Git repository
+
+- Add identities of those users to Azure AD tenant.
+    - External guest access policy is needed.
+
+- Create new Permissions group
+    - Allow these two:
+        - View project-level information: Allowed (inherited)
+        - View analytics : Allowed (inherited)
+    - And deny rest of the options
