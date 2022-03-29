@@ -21,11 +21,18 @@ Created App registration can be seen in Azure portal `Azure Active Directory`'s 
 
 ### Roles required
 
-Note: These might not be minimum roles but these are enough roles.
+Note: These might not be minimum roles but these are enough roles to create Service Connection manually:
 
 - DevOps: Project administrator
 - Subscription: Owner
 - AAD directory role: Global administrator or maybe Application developer is enough
+
+Service Principal roles to be used with Service Connection:
+
+- Reader role to subscription
+- Contributor role to resource group
+
+Note that DevOps task `AzureFileCopy@4` that is used to copy files to Blob storage requires explicitly `Storage Blob Data Contributor` or `owner role`.
 
 ## External developers to selected Git repository
 

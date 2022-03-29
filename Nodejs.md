@@ -14,6 +14,13 @@
 
 ```JavaScript
 npm audit
+npm audit fix
+```
+
+Stop node process
+
+```JavaScript
+process.exit();
 ```
 
 ## JavaScript
