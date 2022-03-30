@@ -113,6 +113,20 @@ exampleapp.azurewebsites.net
 
 Note that f.ex. One.com doesn't support custom domains that are not in One.com.
 
+# IIS
+
+Redirect http to https:
+
+```conf
+<rule name="HTTPSforce" enabled="true" stopProcessing="true">
+    <match url="(.*)" />
+    <conditions>
+        <add input="{HTTPS}" pattern="OFF$" />
+    </conditions>
+    <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" redirectType="Permanent" />
+</rule>
+```
+
 # WAMP server
 
 Default setting is such that `C:\wamp64\www` folder is `http://localhost` and `C:\wamp64\www\project1` folder is `http://localhost/project1`.
