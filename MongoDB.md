@@ -117,6 +117,26 @@ Ports need not be opened unless access to DB is needed from outside of the stack
 
 ---
 
+## Atlas
+
+Copy DB dump from Docker MongoDB to Atlas
+
+```sh
+# Go to local MongoDB Docker container
+docker exec -it mongo_db bash
+
+# And create DB dumb. Note that the dump will be created to subfolder with the DB name
+mongodump --username=admin --password=<PASSWORD> --authenticationDatabase=admin --port <PORT> --db <DATABASE_NAME> --out /data/db/dumps
+
+# Or create DB dump from Atlas
+mongodump --uri mongodb+srv://<USERNAME>:<PASSWORD>@server.mongodb.net/<DATABASE> 
+
+# DB dump from Atlas with Docker Mongo and with one command. Using local folder as Docker volume:
+docker run -i --rm -v /tmp/atlas/:/dump mongo mongodump --uri mongodb+srv://<USERNAME>:<PASSWORD>@server.mongodb.net/<DATABASE>
+
+# restore DB dump to Atlas. Note that -d parameter is needed or restore fails.
+mongorestore --uri mongodb+srv://<USERNAME>:<PASSWORD>@server.mongodb.net /data/db/dumps/<SUB_FOLDER> -d <DATABASE_NAME>
+```
 
 ## Transfer database from Docker container
 
