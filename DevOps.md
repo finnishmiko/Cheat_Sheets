@@ -44,3 +44,16 @@ Note that DevOps task `AzureFileCopy@4` that is used to copy files to Blob stora
         - View project-level information: Allowed (inherited)
         - View analytics : Allowed (inherited)
     - And deny rest of the options
+
+
+## Debug DevOps pipeline
+
+Check folder contents with this script:
+
+```yml
+    - script: |
+        id
+        ls -la
+        pwd
+      workingDirectory: '$(Build.StagingDirectory)'
+```
