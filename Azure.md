@@ -94,7 +94,14 @@ There are two different setups to do it:
 - This "deploying inplace" is done with env variable: SCM_REPOSITORY_PATH="wwwroot"
 - This setup is needed f.ex. with Wordpress where php-files are modified during updates. Remember to add and commit these changes to the Git from Azure side.
 
-## Azure web app deployment slots
+## Azure web app
+
+- WebSocket connections: Standard size ASP has unlimited but Basic limits them to 350.
+- Always On requires Basic size.
+- Windows version
+    - Application logs are not stored to Blob storage
+
+### Azure web app deployment slots
 
 Note Windows server only at this moment.
 
