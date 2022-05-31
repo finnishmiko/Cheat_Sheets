@@ -126,6 +126,46 @@ Redirect http to https:
     </conditions>
     <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" redirectType="Permanent" />
 </rule>
+
+<rule name="RedirectNonWwwToWww" stopProcessing="true">
+    <match url="(.*)" />
+    <conditions>
+        <add input="{HTTP_HOST}" pattern="^domain.com$" />
+    </conditions>
+    <action type="Redirect" url="https://www.domain.com/{R:0}" redirectType="Permanent" />
+</rule>
+
+
+<rule name="Redirect to new domain" enabled="true">
+    <match url="(.*)$" />
+    <conditions trackAllCaptures="true">
+        <add input="{HTTP_HOST}" negate="false" pattern="^(.*)\.foo\.com" />
+    </conditions>
+    <action type="Redirect" url="https://{C:1}.bar.com/{R:1}" appendQueryString="true" redirectType="Permanent" />
+</rule>
+
+
+<rule name="All HTTP to HTTPS+WWW" stopProcessing="true">
+    <match url=".*" />
+    <conditions trackAllCaptures="true">
+        <add input="{SERVER_PORT_SECURE}" pattern="0" />
+        <add input="{HTTP_HOST}" pattern="(?:localhost|stage\.|dev\.)" negate="true" />
+        <!-- here with this 3rd condition we capture the host name without "www." prefix into {C:1} variable to use in redirect action -->
+        <add input="{HTTP_HOST}" pattern="^(?:www\.)?(.+)" />
+    </conditions>
+    <action type="Redirect" url="https://www.{C:1}/{R:0}" appendQueryString="true" redirectType="Permanent" />
+</rule>                
+
+<rule name="All HTTPS With No WWW to HTTPS+WWW" stopProcessing="true">
+    <match url=".*" />
+    <conditions trackAllCaptures="false">
+        <add input="{SERVER_PORT_SECURE}" pattern="1" />
+        <add input="{HTTP_HOST}" pattern="(?:localhost|stage\.|dev\.)" negate="true" />
+        <add input="{HTTP_HOST}" pattern="^www\." negate="true" />
+    </conditions>
+    <action type="Redirect" url="https://www.{HTTP_HOST}/{R:0}" appendQueryString="true" redirectType="Permanent" />
+</rule>
+
 ```
 
 Define allowed media types.
