@@ -20,3 +20,23 @@ if (window.location && window.location.protocol !== "https:") {
   }
 }
 ```
+
+Validate email reg exp vs. pattern:
+
+```js
+function validateEmail(email) {
+  // must have a @ and a dot in the email address
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  return re.test(email);
+}
+```
+
+```html
+<form>
+  <input pattern="[^@\s]+@[^@\s]+\.[^@\s]+" required />
+  <br />
+  <input type="submit" value="Submit" />
+</form>
+```
