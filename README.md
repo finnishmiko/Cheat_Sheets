@@ -1,6 +1,7 @@
 # Cheat Sheets
 
 - [ATtiny13A](ATtiny13A.md)
+- [Application Insights](ApplicationInsights.md)
 - [Azure](Azure.md)
 - [Chrome](Chrome.md)
 - [Craft](Craft.md)
@@ -113,7 +114,7 @@ exampleapp.azurewebsites.net
 
 Note that f.ex. One.com doesn't support custom domains that are not in One.com.
 
-# IIS
+# IIS `web.config` settings
 
 Redirect http to https:
 
@@ -125,6 +126,57 @@ Redirect http to https:
     </conditions>
     <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" redirectType="Permanent" />
 </rule>
+```
+
+Define allowed media types.
+
+```conf
+<staticContent>
+    <mimeMap fileExtension="woff" mimeType="application/font-woff" />
+    <mimeMap fileExtension="woff2" mimeType="application/font-woff2" />
+    <mimeMap fileExtension=".mp4" mimeType="video/mp4" />
+    <mimeMap fileExtension=".m4v" mimeType="video/m4v" />
+    <mimeMap fileExtension=".jpg" mimeType="image/jpeg" />
+    <mimeMap fileExtension=".jpeg" mimeType="image/jpeg" />
+    <mimeMap fileExtension=".webp" mimeType="image/webp" />
+    <mimeMap fileExtension=".png" mimeType="image/png" />
+    <mimeMap fileExtension=".gif" mimeType="image/gif" />
+    <mimeMap fileExtension=".svg" mimeType="image/svg+xml" />
+    <mimeMap fileExtension=".css" mimeType="text/css" />
+    <mimeMap fileExtension=".js" mimeType="text/javascript" />
+    <clientCache cacheControlCustom="private" cacheControlMode="UseMaxAge" cacheControlMaxAge="7.00:00:00" />
+</staticContent>
+```
+
+Use webp images if awailable.
+
+```conf
+<rewrite>
+    <rules>
+        <rule name="Redirect existing converted images to WEBP if available" enabled="true" stopProcessing="true">
+            <match url="(.*)\.(jpe?g|png)$" />
+            <conditions logicalGrouping="MatchAll" trackAllCaptures="true">
+                <add input="{HTTP_ACCEPT}" pattern="image/webp" />
+                <add input="{REQUEST_FILENAME}.webp" matchType="IsFile" />
+            </conditions>
+            <action type="Rewrite" url="{R:1}.{R:2}.webp" />
+        </rule>
+    </rules>
+</rewrite>
+```
+
+Security options.
+
+```conf
+<security>
+    <requestFiltering removeServerHeader="true" />
+</security>
+
+<httpProtocol>
+    <customHeaders>
+        <remove name="X-Powered-By" />
+    </customHeaders>
+</httpProtocol>
 ```
 
 # WAMP server
@@ -196,4 +248,16 @@ TRACERT.EXE 192.168.1.1
 (Get-ChildItem -Path *.* -Filter *.pst | ? { $_.LastWriteTime -gt (Get-Date).AddDays(-1) }).Count
 
 Get-ChildItem -Path . -Recurse| ? {$_.LastWriteTime -gt (Get-Date).AddDays(-4)}
+```
+
+List all files in subfolders
+
+```PowerShell
+Get-ChildItem -File -Path . -Recurse | Sort-Object -Property Length | Select-Object -Property Length, FullName | Format-Table -AutoSize
+```
+
+Display only larget than 3 MB filesFilter with size and save output to file:
+
+```PowerShell
+Get-ChildItem -File -Path . -Recurse | where Length -gt 3mb | Sort-Object -Property Length | Select-Object -Property Length, FullName | Format-Table -AutoSize | Out-File -FilePath C:\temp\output.txt
 ```
