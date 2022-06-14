@@ -110,6 +110,8 @@ www
 exampleapp.azurewebsites.net
 ```
 
+Note that after this the site responds both to root domain and subdomain and also to azurewebsites.net domain. In Wordpress wp-config.php's WP_HOME and SITE_URL settings can be configured to direct all trafic to one site i.e. hard code one url.
+
 ### Other hosting companies
 
 Note that f.ex. One.com doesn't support custom domains that are not in One.com.
@@ -144,6 +146,22 @@ Redirect http to https:
     <action type="Redirect" url="https://{C:1}.bar.com/{R:1}" appendQueryString="true" redirectType="Permanent" />
 </rule>
 
+<rule name="Redirect rquests to default azure websites domain" stopProcessing="true">
+    <match url="(.*)" />
+    <conditions logicalGrouping="MatchAny">
+        <add input="{HTTP_HOST}" pattern="^yoursite\.azurewebsites\.net$" />
+    </conditions>
+    <action type="Redirect" url="http://www.yoursite.com/{R:0}" />
+</rule>
+
+<rule name="Redirect to non-www" stopProcessing="true">
+    <match url="(.*)" negate="false"></match>
+    <action type="Redirect" url="http://domain.com/{R:1}"></action>
+    <conditions>
+        <add input="{HTTP_HOST}" pattern="^domain\.com$" negate="true"></add>
+    </conditions>
+</rule>
+
 
 <rule name="All HTTP to HTTPS+WWW" stopProcessing="true">
     <match url=".*" />
@@ -154,7 +172,7 @@ Redirect http to https:
         <add input="{HTTP_HOST}" pattern="^(?:www\.)?(.+)" />
     </conditions>
     <action type="Redirect" url="https://www.{C:1}/{R:0}" appendQueryString="true" redirectType="Permanent" />
-</rule>                
+</rule>
 
 <rule name="All HTTPS With No WWW to HTTPS+WWW" stopProcessing="true">
     <match url=".*" />
@@ -300,4 +318,12 @@ Display only larget than 3 MB filesFilter with size and save output to file:
 
 ```PowerShell
 Get-ChildItem -File -Path . -Recurse | where Length -gt 3mb | Sort-Object -Property Length | Select-Object -Property Length, FullName | Format-Table -AutoSize | Out-File -FilePath C:\temp\output.txt
+```
+
+```PowerShell
+# Bash: cat FILENAME -tail 200
+# -Wait means "follow"
+Get-Content FILENAME -tail 200 -Wait
+
+Rename-Item .\oldname.txt .\newname.txt
 ```

@@ -33,6 +33,10 @@ echo "drop database mariadb; CREATE DATABASE mariadb CHARACTER SET utf8 COLLATE 
 docker cp "..............dump-db.sql" $MariaDBInstance":/tmp/databasedump"
 
 docker exec -i $MariaDBInstance /bin/bash -c "cat /tmp/databasedump | mysql -u mariadb --password=mariadb mariadb && rm /tmp/databasedump"
+
+# Create database dump:
+docker exec -i $MariaDBInstance /bin/bash -c "mysqldump -u mariadb --password=mariadb mariadb > /tmp/databasedump.sql"
+docker cp $MariaDBInstance":/tmp/databasedump.sql" .
 ```
 
 Change wp_options table's home and siteurl values to devcontainer's url:
