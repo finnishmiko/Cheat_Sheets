@@ -28,12 +28,20 @@
 
 ## azcopy
 
-Add SAS-token to the commands.
-
-Sync all files and subfolders to blob storage:
+Add SAS-token to the commands or to variable.
 
 ```PowerShell
+# Set access token to variable:
+export BLOB_KEY="?sv=..."
+
+# Sync all files and subfolders to blob storage static web app folder:
 azcopy.exe sync '.\build' 'https://yourstorageaccountname.blob.core.windows.net/$web?sv=...'
+
+# Sync all files from local to Blob storage container's folder:
+azcopy.exe sync 'path\to\folder' 'https://<blobstorage>.blob.core.windows.net/<blob container>/<blob folder>${BLOB_KEY}'
+
+# Sync all files from Blob storage to local folder
+azcopy.exe sync "https://<blobstorage>.blob.core.windows.net/<blob container>/<blob folder>${BLOB_KEY}" /uploads --recursive=true --delete-destination=true
 ```
 
 Copy all files and subfolders to blob storage
@@ -99,7 +107,7 @@ There are two different setups to do it:
 - WebSocket connections: Standard size ASP has unlimited but Basic limits them to 350.
 - Always On requires Basic size.
 - Windows version
-    - Application logs are not stored to Blob storage
+  - Application logs are not stored to Blob storage
 
 ### Azure web app deployment slots
 

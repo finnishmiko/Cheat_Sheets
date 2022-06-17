@@ -137,6 +137,13 @@ Redirect http to https:
     <action type="Redirect" url="https://www.domain.com/{R:0}" redirectType="Permanent" />
 </rule>
 
+<rule name="CanonicalHostNameRule1">
+    <match url="(.*)" />
+    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+        <add input="{HTTP_HOST}" pattern="^www\.domain.com$" negate="true" />
+    </conditions>
+    <action type="Redirect" url="https://www.domain.com/{R:1}" />
+</rule>
 
 <rule name="Redirect to new domain" enabled="true">
     <match url="(.*)$" />

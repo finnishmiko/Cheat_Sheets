@@ -34,6 +34,18 @@ docker cp "..............dump-db.sql" $MariaDBInstance":/tmp/databasedump"
 
 docker exec -i $MariaDBInstance /bin/bash -c "cat /tmp/databasedump | mysql -u mariadb --password=mariadb mariadb && rm /tmp/databasedump"
 
+# Powershell 7
+# Note the usage of dollar sign
+MARIADB=`docker ps -q --filter="name=devcontainer_name_db_1" --format "{{.Names}}"`
+
+echo "show databases;" | docker exec -i $MARIADB mysql -u root --password=password
+echo "use databasename;select * from tablename" | docker exec -i $MARIADB mysql -u root --password=password
+
+DATABASE="databasename"
+
+echo "drop database $DATABASE; CREATE DATABASE $DATABASE CHARACTER SET utf8 COLLATE utf8_unicode_ci;" |  docker exec -i $MARIADB mysql -u root --password=password
+cat /tmp/databasedump.sql | docker exec -i $MARIADB mysql -u root --password=password $DATABASE
+
 # Create database dump:
 docker exec -i $MariaDBInstance /bin/bash -c "mysqldump -u mariadb --password=mariadb mariadb > /tmp/databasedump.sql"
 docker cp $MariaDBInstance":/tmp/databasedump.sql" .
@@ -49,4 +61,22 @@ UPDATE wp_options SET option_value="http://localhost:8080" WHERE option_name = "
 
 SELECT * FROM wp_options WHERE option_name = 'siteurl';
 UPDATE wp_options SET option_value="http://localhost:8080" WHERE option_name = "siteurl";
+```
+
+```SQL
+CREATE USER 'username'@'host' IDENTIFIED BY 'password';
+GRANT PRIVILEGE ON database.table TO 'username'@'host';
+GRANT ALL PRIVILEGES ON databasename.* TO 'username'@'%';
+
+# List database users
+SELECT User, Host, Password FROM mysql.user;
+SHOW GRANTS FOR 'username'@'host';
+SHOW GRANTS FOR 'username'@'%';
+
+# Revoke permissions
+
+REMOVE permission1, permission2, permission3 ON databasename.* FROM 'username'@'localhost';
+
+# This command reloads the tables with the new users and privileges included.
+FLUSH PRIVILEGES;
 ```
