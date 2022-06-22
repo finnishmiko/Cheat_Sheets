@@ -209,6 +209,13 @@ Define allowed media types.
     <mimeMap fileExtension=".svg" mimeType="image/svg+xml" />
     <mimeMap fileExtension=".css" mimeType="text/css" />
     <mimeMap fileExtension=".js" mimeType="text/javascript" />
+</staticContent>
+```
+
+Cache control. This enables 7 day caching of all HTML content.
+
+```conf
+<staticContent>
     <clientCache cacheControlCustom="private" cacheControlMode="UseMaxAge" cacheControlMaxAge="7.00:00:00" />
 </staticContent>
 ```

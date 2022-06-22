@@ -1,6 +1,10 @@
 # Wordpress
 
-There seems to be bots trying to log in with real admin name. One fix is to change `user_nicename` in database to something else. That is used as user's slug. F.ex. to find user's posts slug is used lit this: `mysite.com/author/<user_slug>`.
+## Security tweaks
+
+### Hide real admin names
+
+There seems to be bots trying to log in with real admin name. One fix is to change `user_nicename` in database to something else. That is used as user's slug. F.ex. to find user's posts slug is used like this: `mysite.com/author/<user_slug>`.
 
 ## DevOps pipeline
 
@@ -9,6 +13,40 @@ To prevent /uploads folder removal during site update add to Azure App Service d
 ```
 -skip:Directory=\\wp-content\\uploads
 ```
+
+## Site speed
+
+Compare Wordpress site speed in different servers with speed tests:
+
+- [Pagespeed](https://pagespeed.web.dev/)
+- Lighthouse in Edge browser
+
+Servers to test: 
+
+- Server 1: Azure Web App (production P2V2 (7GB)) + Azure MySQL server (Basic, 2 vCore)
+- Server 2: Lounea
+
+Test runs: 4
+
+Test | Azure | Lounea | mobile/web | tester
+---|---|---|---|---
+Performance | 88-93 | 87-91 | mobile | pagespeed
+Performance | 79-81 | 81-83 | mobile | Lighthouse
+First Contentful Paint | 1.4-1.4s | 1.2-1.2s | mobile | pagespeed
+First Contentful Paint | 1.4-1.5s | 1.2-1.3s | mobile | Lighthouse
+Time to Interactive | 3.0-3.1s | 1.2-3.3s | mobile | pagespeed
+Time to Interactive | 1.4-3.3s | 1.2-3.2s | mobile | Lighthouse
+Speed Index | 1.6-3.1s | 1.5-5.4s | mobile | pagespeed
+Speed Index | 2.8-4.5s | 1.6-4.0s | mobile | Lighthouse
+||||
+Performance | 99 | 98-99 | web | pagespeed
+First Contentful Paint | 0.3-0.4s | 0.3-0.4s | web | pagespeed
+Time to Interactive | 0.3-0.4s | 0.3-0.4s | web | pagespeed
+Speed Index | 0.6-1.1s | 0.7-1.3s | web | pagespeed
+||||
+
+
+
 
 ## Create custom block with @wordpress/create-block
 

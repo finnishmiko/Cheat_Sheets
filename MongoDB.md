@@ -14,13 +14,13 @@ Shell:
 - Create or select existing DB: `use <dbname>`
 - Show collections: `show collections`
 - List objects in collection: `db.collection.find()`
-	- Sort in reverse order: `.sort({"_id": -1})`
-	- Find all emails with gmail: `.find({"email": /gmail\.com/})`
-	- Find all documents with key "email": `.find({email: {$exists: 1}})`
+  - Sort in reverse order: `.sort({"_id": -1})`
+  - Find all emails with gmail: `.find({"email": /gmail\.com/})`
+  - Find all documents with key "email": `.find({email: {$exists: 1}})`
 - Delete collection: `db.collection.drop()`
 - Show collection contents `db.collection.find().pretty().limit(5)`
 - Delete document: `db.collection.deleteOne({<query>})`
-	- Delete from all documents key value pair where key is "email": `.updateMany({}, {$unset: {email: {$exists: 1}}})`
+  - Delete from all documents key value pair where key is "email": `.updateMany({}, {$unset: {email: {$exists: 1}}})`
 - Inser document: `db.collection.insertOne({name: "Name"})`
 - Update codument. Both booleans below defaults false. Upsert true means that new document is created if no document match the filter.
 
@@ -84,10 +84,9 @@ var url = "mongodb://localhost/test";
 
 If connection string username or password has `@`-character, it needs to be URL encoded to `%40`.
 
-
 ### Use volume with Mongo
 
-Map volume to a local folder where Mongo's data would be stored if local Mongo were installed. In Ubuntu it is `/var/lib/mongodb`. 
+Map volume to a local folder where Mongo's data would be stored if local Mongo were installed. In Ubuntu it is `/var/lib/mongodb`.
 
 Local driver on Linux accepts options similar to the linux `mount` command.
 
@@ -98,12 +97,12 @@ Docker command to create a volume:
 To .yml file volume is mapped to data folder inside Mongo container i.e. `/data/db`:
 
 ```yml
-version: '3.1'
+version: "3.1"
 services:
   mongodb:
     image: mongo
     ports:
-      - '27017:27017'
+      - "27017:27017"
     restart: always
     volumes:
       - mongodb_volume:/data/db
@@ -112,8 +111,29 @@ volumes:
     external: true
 ```
 
-Ports need not be opened unless access to DB is needed from outside of the stack. 
+Ports need not be opened unless access to DB is needed from outside of the stack.
 
+### Replica set
+
+Convert existing Mongo to replica set:
+
+1. To MONGODB_URL add `?replicaSet=rs`
+2. Add following entrypoint setting to docker-compose.yml
+
+```yml
+services:
+  mongodb:
+    image: mongo
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs"]
+```
+
+3. Go to inside MongoDB container shell and run:
+
+```bash
+docker exec -it mongodb_container mongosh
+rs.initiate()
+rs.status()
+```
 
 ---
 
@@ -129,7 +149,7 @@ docker exec -it mongo_db bash
 mongodump --username=admin --password=<PASSWORD> --authenticationDatabase=admin --port <PORT> --db <DATABASE_NAME> --out /data/db/dumps
 
 # Or create DB dump from Atlas
-mongodump --uri mongodb+srv://<USERNAME>:<PASSWORD>@server.mongodb.net/<DATABASE> 
+mongodump --uri mongodb+srv://<USERNAME>:<PASSWORD>@server.mongodb.net/<DATABASE>
 
 # DB dump from Atlas with Docker Mongo and with one command. Using local folder as Docker volume:
 docker run -i --rm -v /tmp/atlas/:/dump mongo mongodump --uri mongodb+srv://<USERNAME>:<PASSWORD>@server.mongodb.net/<DATABASE>
@@ -159,6 +179,7 @@ mongorestore --db <db name> dump/
 Bash script example using DB admin user
 `sudo su -`
 `bash backup_mongo_db.sh`
+
 ```bash
 FILENAME=/tmp/backup-$(date '+%Y-%m-%d').tar.gz
 rm -rf /tmp/backup
@@ -218,9 +239,9 @@ const testObject = await TestObject.findOne({ text: test }).populate({
     path: "secondObject",
     populate: {
       model: "ThirdLevel",
-      path: "thirdLevel"
-    }
-  }
+      path: "thirdLevel",
+    },
+  },
 });
 ```
 
@@ -230,7 +251,7 @@ Instead of looping items list and making one DB request at each round, create a 
 
 ```javascript
 const queryList = items.map((i: item) => {
-  return {inventory: i.inventory}
-})
-db.inventory.find( { $or: queryList } )
+  return { inventory: i.inventory };
+});
+db.inventory.find({ $or: queryList });
 ```
