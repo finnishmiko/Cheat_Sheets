@@ -61,6 +61,10 @@ Check folder contents with this script:
 ## DevOps pipeline debugging with azure-pipelines.yml
 
 ```yml
+
+trigger:
+  - main
+
 variables:
 - name: 'artifactName'
   value: 'WebApp-$(Build.SourceBranchName)'
@@ -105,6 +109,7 @@ stages:
     # which is $(System.DefaultWorkingDirectory)
 
     # Folders in pipeline:
+    # $(Agent.WorkFolder):          /home/vsts/work
     # This folder contains Git-repository items:
     # $(System.DefaultWorkingDirectory): /home/vsts/work/1/s
     # $(Pipeline.Workspace):        /home/vsts/work/1

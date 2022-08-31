@@ -184,6 +184,8 @@ Bash script example using DB admin user
 FILENAME=/tmp/backup-$(date '+%Y-%m-%d').tar.gz
 rm -rf /tmp/backup
 mkdir /tmp/backup
+# Give docker process owner access to the folder
+# ls -ln # to see owner numbers
 chown 999 /tmp/backup
 docker run -it --rm -v /tmp/backup/:/dump mongo mongodump --db <db name> -u admin -p <password> -h 172.18.0.1 --authenticationDatabase=admin && \
 cd /tmp/backup && \

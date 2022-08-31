@@ -69,6 +69,15 @@ git config --global credential.useHttpPath true
 
 F.ex. case where backend is in different devcontainer than frontend.
 
+# Connect from inside of a Docker container to localhost of the host machine
+
+```bash
+# instead of
+curl http://localhost:3001/api/status
+# use
+curl http://host.docker.internal:3001/api/status
+```
+
 # Use local Docker to control Docker in VM:
 
 ### Open TCP port for Docker in VM
