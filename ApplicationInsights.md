@@ -12,3 +12,9 @@ union isfuzzy=true
 | order by timestamp desc
 | take 100
 ```
+
+Example snippets
+
+```s
+where timestamp > ago(10h)
+```

@@ -153,7 +153,15 @@ Redirect http to https:
     <action type="Redirect" url="https://{C:1}.bar.com/{R:1}" appendQueryString="true" redirectType="Permanent" />
 </rule>
 
-<rule name="Redirect rquests to default azure websites domain" stopProcessing="true">
+<rule name="Redirect to newDomain.fi" stopProcessing="true">
+    <match url="(.*)" />
+    <conditions>
+        <add input="{HTTP_HOST}" pattern="^old\.domain\.fi$" />
+    </conditions>
+    <action type="Redirect" url="https://newDomain.fi/{R:1}" redirectType="Permanent" />
+</rule>
+
+<rule name="Redirect requests to default azure websites domain" stopProcessing="true">
     <match url="(.*)" />
     <conditions logicalGrouping="MatchAny">
         <add input="{HTTP_HOST}" pattern="^yoursite\.azurewebsites\.net$" />
@@ -174,7 +182,7 @@ Redirect http to https:
     <match url=".*" />
     <conditions trackAllCaptures="true">
         <add input="{SERVER_PORT_SECURE}" pattern="0" />
-        <add input="{HTTP_HOST}" pattern="(?:localhost|stage\.|dev\.)" negate="true" />
+        <add input="{HTTP_HOST}" pattern="(?:localhost|stage\.|dev\.|\.azurewebsites.net)" negate="true" />
         <!-- here with this 3rd condition we capture the host name without "www." prefix into {C:1} variable to use in redirect action -->
         <add input="{HTTP_HOST}" pattern="^(?:www\.)?(.+)" />
     </conditions>
@@ -185,7 +193,7 @@ Redirect http to https:
     <match url=".*" />
     <conditions trackAllCaptures="false">
         <add input="{SERVER_PORT_SECURE}" pattern="1" />
-        <add input="{HTTP_HOST}" pattern="(?:localhost|stage\.|dev\.)" negate="true" />
+        <add input="{HTTP_HOST}" pattern="(?:localhost|stage\.|dev\.|\.azurewebsites.net)" negate="true" />
         <add input="{HTTP_HOST}" pattern="^www\." negate="true" />
     </conditions>
     <action type="Redirect" url="https://www.{HTTP_HOST}/{R:0}" appendQueryString="true" redirectType="Permanent" />

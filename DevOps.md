@@ -48,6 +48,8 @@ Note that DevOps task `AzureFileCopy@4` that is used to copy files to Blob stora
 
 ## Debug DevOps pipeline
 
+Three levels: Stages, jobs and tasks.
+
 Check folder contents with this script:
 
 ```yml
