@@ -15,6 +15,7 @@
 - [Open port](#Open-port)
 - [Resize VM](#Resize-VM)
 - [Static web app to Storage account and SSL certificate with Azure CDN](#Static-web-app-to-Storage-account-and-SSL-certificate-with-Azure-CDN)
+- [Static web app](#Static-web-app)
 - [Deploy React Web App from local Git repository](#Deploy-React-Web-App-from-local-Git-repository)
 - [Chrome console says it can't load `manifest.json` file](#Chrome-console-says-it-can't-load-`manifest.json`-file)
 - [Deploy Node Express Web App from local Git repository](#Deploy-Node-Express-Web-App-from-local-Git-repository)
@@ -240,6 +241,10 @@ az vm show \
 Note that default caching rules is set to 7 days expiration. At least `service-worker.js` should be bypassed so that new SW version is recognized. Also note that the UI indicator needs to be implemented to React code.
 
 Cache at Azure CDN can be cleared from Azure Portal using Purge feature.
+
+## Static web app
+
+Custom domain sertificate auto renewal uses http-token method. And for that to work add `.well-known/pki-validation/fileauth.txt` file, so that digicert can validate the domain.
 
 ## Deploy React Web App from local Git repository
 
