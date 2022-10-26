@@ -14,6 +14,7 @@
   - [configure-iis.ps1](#configure-iis.ps1)
 - [Open port](#Open-port)
 - [Resize VM](#Resize-VM)
+- [App Service Managed Certificate](#App-Service-Managed-Certificate)
 - [Static web app to Storage account and SSL certificate with Azure CDN](#Static-web-app-to-Storage-account-and-SSL-certificate-with-Azure-CDN)
 - [Static web app](#Static-web-app)
 - [Deploy React Web App from local Git repository](#Deploy-React-Web-App-from-local-Git-repository)
@@ -214,6 +215,10 @@ az vm show \
   --query "hardwareProfile" \
   --output tsv
 ```
+
+## App Service Managed Certificate
+
+Note that subdomain's CNAME needs to point to the Azure web app so that the certificate can be renewed.
 
 ## Static web app to Storage account and SSL certificate with Azure CDN
 
