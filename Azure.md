@@ -2,7 +2,6 @@
 
 - [Tenant](#Tenant)
 - [azcopy](#azcopy)
-- [Kudu Powershell](#Kudu-Powershell)
 - [Key Vault](#Key-Vault)
   - [CSR (certificate signing request)](<#CSR-(certificate-signing-request)>)
   - [Renew a nonintegrated CA certificate](#Renew-a-nonintegrated-CA-certificate)
@@ -50,14 +49,6 @@ Copy all files and subfolders to blob storage
 
 ```PowerShell
 azcopy.exe copy '.\build\*' 'https://yourstorageaccountname.blob.core.windows.net/$web?sv=...' --recursive
-```
-
-## Kudu Powershell
-
-Calculate size of uploads folder and subfolders
-
-```PowerShell
-"{0} MB" -f ((Get-ChildItem uploads\ -Recurse | Measure-Object -Property Length -Sum -ErrorAction Stop).Sum / 1MB)
 ```
 
 ## Curl log stream

@@ -55,3 +55,61 @@ az role assignment list --assignee <principalID> --scope <scope to check>
 # Create new role to scope (if missing)
 az role assignment create --role "Storage Blob Data Contributor" --assignee "<principalId>" --description "<add text description>" --scope "/subscriptions/<subscription id>/resourceGroups/<resource group name>/providers/Microsoft.Storage/storageAccounts/<storage account name>"
 ```
+
+
+# PowerShell commands
+
+Calculate size of uploads folder and subfolders
+
+```PowerShell
+"{0} MB" -f ((Get-ChildItem uploads\ -Recurse | Measure-Object -Property Length -Sum -ErrorAction Stop).Sum / 1MB)
+```
+
+Check DNS-records:
+
+```powershell
+nslookup -type=TXT test.com
+nslookup -type=CNAME test.com
+nslookup -type=A test.com
+
+Resolve-DnsName test.com
+```
+
+```powershell
+Get-NetIPAddress
+
+TRACERT.EXE 192.168.1.1
+
+```
+
+```PowerShell
+(Get-ChildItem -Path c:\pstbak\*.* -Filter *.pst | ? {
+  $_.LastWriteTime -gt (Get-Date).AddDays(-3)
+}).Count
+```
+
+```PowerShell
+(Get-ChildItem -Path *.* -Filter *.pst | ? { $_.LastWriteTime -gt (Get-Date).AddDays(-1) }).Count
+
+Get-ChildItem -Path . -Recurse| ? {$_.LastWriteTime -gt (Get-Date).AddDays(-4)}
+```
+
+List all files in subfolders
+
+```PowerShell
+Get-ChildItem -File -Path . -Recurse | Sort-Object -Property Length | Select-Object -Property Length, FullName | Format-Table -AutoSize
+```
+
+Display only larget than 3 MB filesFilter with size and save output to file:
+
+```PowerShell
+Get-ChildItem -File -Path . -Recurse | where Length -gt 3mb | Sort-Object -Property Length | Select-Object -Property Length, FullName | Format-Table -AutoSize | Out-File -FilePath C:\temp\output.txt
+```
+
+```PowerShell
+# Bash: cat FILENAME -tail 200
+# -Wait means "follow"
+Get-Content FILENAME -tail 200 -Wait
+
+Rename-Item .\oldname.txt .\newname.txt
+```
