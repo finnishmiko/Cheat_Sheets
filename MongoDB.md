@@ -257,3 +257,33 @@ const queryList = items.map((i: item) => {
 });
 db.inventory.find({ $or: queryList });
 ```
+
+
+## Check featureCompatibilityVersion 
+
+```
+
+rs.config()
+rs.status()
+
+db.isMaster()
+
+db.adminCommand( 
+    { 
+        getParameter: 1, 
+        featureCompatibilityVersion: 1 
+    } 
+)
+
+# Result example
+{ "featureCompatibilityVersion" : { "version" : "5.0" }, "ok" : 1 }
+
+
+db.adminCommand(
+   {
+     setFeatureCompatibilityVersion: 4.4,
+     writeConcern: { wtimeout: 1000 }
+   }
+)
+
+```

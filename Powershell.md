@@ -59,6 +59,23 @@ az role assignment create --role "Storage Blob Data Contributor" --assignee "<pr
 
 # PowerShell commands
 
+
+```PowerShell
+# Bash: cat FILENAME -tail 200
+# -Wait means "follow"
+Get-Content FILENAME -tail 200 -Wait
+
+Rename-Item .\oldname.txt .\newname.txt
+
+# pwd
+Get-Location
+
+# cd - change directory
+Push-Location
+
+```
+
+
 Calculate size of uploads folder and subfolders
 
 ```PowerShell
@@ -106,10 +123,30 @@ Display only larget than 3 MB filesFilter with size and save output to file:
 Get-ChildItem -File -Path . -Recurse | where Length -gt 3mb | Sort-Object -Property Length | Select-Object -Property Length, FullName | Format-Table -AutoSize | Out-File -FilePath C:\temp\output.txt
 ```
 
-```PowerShell
-# Bash: cat FILENAME -tail 200
-# -Wait means "follow"
-Get-Content FILENAME -tail 200 -Wait
+## Move files recursively
 
-Rename-Item .\oldname.txt .\newname.txt
+```PowerShell
+
+
+
+$sourcePath = "C:\source"
+$destPath = "C:\destination"
+Write-Host "Moving all files in '$($sourcePath)' to '$($destPath)'"
+$fileList = @(Get-ChildItem -Path "$($sourcePath)" -File -Recurse)
+$directoryList = @(Get-ChildItem -Path "$($sourcePath)" -Directory -Recurse)
+ForEach($directory in $directoryList){
+$directories = New-Item ($directory.FullName).Replace("$($sourcePath)",$destPath) -ItemType Directory -ea SilentlyContinue | Out-Null
+}
+Write-Host "Creating Directories"
+ForEach($file in $fileList){
+try {
+Move-Item -Path $file.FullName -Destination ((Split-Path $file.FullName).Replace("$($sourcePath)",$destPath)) -Force -ErrorAction Stop
+}
+catch{
+Write-Warning "Unable to move '$($file.FullName)' to '$(((Split-Path $file.FullName).Replace("$($sourcePath)",$destPath)))': $($_)"
+return
+}
+}
+Write-Host "Deleting folder '$($sourcePath)'"
+Remove-Item -Path "$($sourcePath)" -Recurse -Force -ErrorAction Stop
 ```

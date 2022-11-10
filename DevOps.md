@@ -126,3 +126,8 @@ stages:
         app_location: '/build'
         azure_static_web_apps_api_token: $(deployment_token)
 ```
+
+## Agent pools
+
+Requires Personal Access Token with `Agent Pools (Read & manage)` rights.
+

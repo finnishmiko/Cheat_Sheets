@@ -78,6 +78,43 @@ Go to wp-admin and enable plugin that was just created. Then the block is awaila
 - string
 - integer
 
+## Load fonts
+
+It is recommended that you preconnect, then preload, and then finally load as follows:
+
+```html
+<!-- Add this line to header template -->
+<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+
+<!-- These two are set to functions.php as follows -->
+<link rel='preload' as='style' href='https://fonts.googleapis.com/css2?family=Open+Sans|Roboto:wght@700&display=swap'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Open+Sans|Roboto:wght@700&display=swap'>
+```
+
+Enqueue fonts
+
+https://stackoverflow.com/questions/50824181/preloading-google-fonts
+
+```php
+function your_theme_scripts() {
+	wp_enqueue_style( 'Fonts-preload', 'https://fonts.googleapis.com/css2?family=Open+Sans|Roboto:wght@700&display=swap', array(), '1.0.0', 'all' );
+	wp_enqueue_style( 'Fonts', 'https://fonts.googleapis.com/css2?family=Open+Sans|Roboto:wght@700&display=swap', array(), '1.0.0', 'all' );
+}
+add_action( 'wp_enqueue_scripts', 'your_theme_scripts' );
+
+# Change first stylesheet to preload:
+add_filter('style_loader_tag', 'your_theme_loader_tag_filter', 10, 2);
+
+function your_theme_loader_tag_filter($html, $handle) {
+    if ($handle === 'Fonts-preload') {
+        return str_replace("rel='stylesheet'",
+            "rel='preload' as='style'", $html);
+    }
+    return $html;
+}
+```
+
+
 ## Check used and unused templates
 
 Add following snippet to functions.php and then visit the site with query parameter: `?template_report`. [Reference](https://wordpress.stackexchange.com/a/311066).
