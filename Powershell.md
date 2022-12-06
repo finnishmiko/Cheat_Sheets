@@ -54,6 +54,12 @@ az role assignment list --assignee <principalID> --scope <scope to check>
 
 # Create new role to scope (if missing)
 az role assignment create --role "Storage Blob Data Contributor" --assignee "<principalId>" --description "<add text description>" --scope "/subscriptions/<subscription id>/resourceGroups/<resource group name>/providers/Microsoft.Storage/storageAccounts/<storage account name>"
+
+############################
+## Check Web app PHP version
+
+az webapp config show --resource-group <resource-group-name> --name <app-name> --query linuxFxVersion
+
 ```
 
 

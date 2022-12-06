@@ -99,10 +99,18 @@ Test for syntax mistakes:
 nginx -t
 ```
 
+Check Nginx config validity
+
+```sh
+nginx -T
+```
+
 Restart Nginx:
 
 ```sh
 sudo /etc/init.d/nginx restart
+# or
+service nginx reload
 ```
 
 Lastly start the node server.

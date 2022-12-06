@@ -540,3 +540,30 @@ To index.php
   </div>
 <?php enfif; ?>
 ```
+
+
+
+## Azure Linux Web app that uses Nginx
+
+```sh
+# Copy over the default nginx configuration file to your home directory:
+cp /etc/nginx/sites-available/default /home/site/nginx.conf
+
+# Modify the copied over nginx configuration file /home/site/nginx.conf and include your custom configuration.
+
+# vi /home/site/nginx.conf
+
+location / {
+    index index.php index.html index.htm;
+    try_files $uri $uri/ /index.php?$args;
+}
+
+
+# Create a bash file /home/site/startup.sh with the following contents:
+
+cp /home/site/nginx.conf /etc/nginx/sites-available/default
+service nginx reload
+
+#Set your app service startup command to /home/site/startup.sh.
+```
+

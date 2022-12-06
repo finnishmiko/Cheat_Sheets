@@ -131,3 +131,9 @@ stages:
 
 Requires Personal Access Token with `Agent Pools (Read & manage)` rights.
 
+
+
+## Git Submodule
+
+Disable this Project Settings -> Pipelines -> Settings:
+- `Protect access to repositories in YAML pipelines`

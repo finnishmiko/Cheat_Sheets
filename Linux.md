@@ -16,6 +16,15 @@ Check the kernel version:
 uname -r
 ```
 
+## Curl
+
+### Debug why image is not visible in Twitter sharing
+
+Check with curl that the meta tags are set correctly:
+
+```bash
+curl -v -A Twitterbot https://address/to/check >> save-to-file.txt
+```
 
 ## .htaccess
 
