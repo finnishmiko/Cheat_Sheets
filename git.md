@@ -12,6 +12,22 @@ git rm filename.txt
 git rm --cached filename.txt
 ```
 
+## Ignore local changes
+
+```sh
+git checkout -f
+```
+
+## Remove untracked files
+
+```sh
+git clean -fdx
+# where
+# -f = force
+# -d = directories
+# -x = ignored files
+```
+
 ## Remove folder with large files from accidentally pushed to Git repository. 
 
 ```PowerShell
