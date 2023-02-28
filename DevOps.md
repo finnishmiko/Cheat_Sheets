@@ -137,3 +137,45 @@ Requires Personal Access Token with `Agent Pools (Read & manage)` rights.
 
 Disable this Project Settings -> Pipelines -> Settings:
 - `Protect access to repositories in YAML pipelines`
+
+## Task snippets
+
+Deploy to Azure Linux Web app. Note additional arguments that can be used to ignore folders (so they won't be removed if they are not included in artifact).
+
+```yml
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Azure App Service Deploy'
+  inputs:
+    azureSubscription: '<subscription name>'
+    appType: 'webAppLinux'
+    WebAppName: <web app name>
+    ResourceGroupName: '<resource group name>'
+    package: '$(Build.StagingDirectory)/*.zip'
+    useWebDeploy: true
+    deploymentType: 'zipDeploy'
+    enableCustomDeployment: true
+    RemoveAdditionalFilesFlag: true
+    AdditionalArguments: '-retryAttempts:6 -retryInterval:10000 -skip:Directory=\\wp-content\\uploads -skip:Directory=\\wp-content\\themes\\my_theme\\assets\\images -skip:Directory=\\wp-content\\webp-express'
+
+```
+
+Deploy to Azure Windows Web app slot.
+
+```yml
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Azure App Service Deploy: s2hbackend'
+  inputs:
+    azureSubscription: '<subscription name OR service connection name>'
+    appType: 'webApp'
+    WebAppName: <web app name>
+    DeployToSlotOrASEFlag: true
+    ResourceGroupName: '<resource group name>'
+    SlotName: 'staging'
+    package: '$(Build.StagingDirectory)/*.zip'
+    WebConfigParameters: '-Handler iisnode -NodeStartFile service.js -appType node'
+    useWebDeploy: true
+    deploymentType: 'webDeploy'
+    enableCustomDeployment: true
+    RemoveAdditionalFilesFlag: true
+
+```

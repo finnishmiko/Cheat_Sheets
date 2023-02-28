@@ -198,6 +198,9 @@ git log --pretty=oneline
 
 # Display changed filenames
 git log --name-only
+
+# Show last n commits
+git log -n 5
 ```
 
 ## Detached HEAD state

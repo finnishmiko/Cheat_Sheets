@@ -4,6 +4,13 @@ Folder:
 
 - `cpresources` - consider this as a cache and add it to .gitignore
 
+## Editable admin area
+
+There are few cases where you need to temporarily open the admin area in production for editing:
+
+1) With SEO-plugin there was a case where settings were not applied to yaml-files, but the setting could not be changed without admin edit rights.
+2) To get plugin lisence key to point correct domain it needs to be saved in admin area. Key can be set with yaml-files, but then the domain in lisence server is wrong.
+
 ## Command line commands
 
 ```sh
