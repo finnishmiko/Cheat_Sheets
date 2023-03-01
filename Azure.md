@@ -275,6 +275,9 @@ git commit -m "Initial Azure commit"
 - If you want to push other branch than master:
   `git push azure dev:master`
 
+- To pull changes from Azure master branch to local dev branch:
+  `git pull azure master:dev`
+
 6. Visit your app at `webappname.azurewebsites.net`
 
 ## Chrome console says it can't load `manifest.json` file
