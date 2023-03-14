@@ -12,6 +12,14 @@ git rm filename.txt
 git rm --cached filename.txt
 ```
 
+## Cancel last local commit
+
+```sh
+
+```sh
+git reset HEAD~1
+```
+
 ## Ignore local changes
 
 ```sh
@@ -26,6 +34,12 @@ git clean -fdx
 # -f = force
 # -d = directories
 # -x = ignored files
+```
+
+## View file differences before commit
+
+```sh
+git diff filename.txt
 ```
 
 ## Remove folder with large files from accidentally pushed to Git repository. 
