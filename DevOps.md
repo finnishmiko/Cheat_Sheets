@@ -34,6 +34,27 @@ Service Principal roles to be used with Service Connection:
 
 Note that DevOps task `AzureFileCopy@4` that is used to copy files to Blob storage requires explicitly `Storage Blob Data Contributor` or `owner role`.
 
+### Service Principal Client secret expired - valid for 2 years
+
+"Could not fetch access token for Azure. Verify if the Service Principal used is valid and not expired. For more information refer https://aka.ms/azureappservicedeploytsg"
+
+First create new client secret:
+
+1. In the Azure portal, in App registrations, select your application.
+2. Select Certificates & secrets > Client secrets > New client secret.
+3. Add a description for your client secret.
+4. Select Add.
+
+Then update the service connection in DevOps portal:
+
+1. Go to Project settings > Service connections, and then select the service connection you want to modify.
+2. Select Edit in the upper-right corner.
+3. Select Save to save the service connection. Note: Don't try to verify the service connection at this step.
+4. Exit the service connection edit window, and then refresh the service connections page.
+5. Select Edit in the upper-right corner, and now select Verify.
+6. Select Save to save your service connection.
+
+
 ## External developers to selected Git repository
 
 - Add identities of those users to Azure AD tenant.

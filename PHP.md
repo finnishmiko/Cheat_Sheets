@@ -142,3 +142,17 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
 	}
 }
 ```
+
+## Run external command in Azure Windows web app
+
+```php
+$command = $cwebpFile . ' -q 80 ' . $filePath . DIRECTORY_SEPARATOR . $fileName . '.' . $extension . ' -o ' . $filePath . DIRECTORY_SEPARATOR . $fileName . '.' . $extension . '.webp';
+$proc=proc_open($command,
+    array(
+        array("pipe","r"),
+        array("pipe","w"),
+        array("pipe","w")
+    ),
+    $pipes);
+print stream_get_contents($pipes[1]);
+```

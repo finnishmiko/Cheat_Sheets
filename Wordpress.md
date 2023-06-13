@@ -567,3 +567,50 @@ service nginx reload
 #Set your app service startup command to /home/site/startup.sh.
 ```
 
+## Azure Windows web app
+
+To convert high resolution images to the WebP format in an Azure Windows Web App server, you can use a third-party tool such as cwebp or WebPconv.
+
+Here are the steps to convert images to WebP format using cwebp:
+
+Download cwebp from the WebP website: https://developers.google.com/speed/webp/docs/precompiled
+
+Extract the downloaded archive and copy the cwebp.exe file to a directory on your Azure Windows Web App server.
+
+Open a command prompt and navigate to the directory where you copied the cwebp.exe file.
+
+Use the following command to convert an image to the WebP format:
+
+```sh
+cwebp -q 80 input.jpg -o output.webp
+```
+Here, "input.jpg" is the name of the high resolution image file, and "output.webp" is the name of the output WebP file. The "-q" option specifies the quality level (in this case, 80).
+
+Repeat the above command for each image you want to convert.
+
+## Disable XML-RPC
+
+```sh
+
+<system.webServer>
+  <rewrite>
+    <rules>
+      <rule name="Disable XML-RPC" stopProcessing="true">
+        <match url="xmlrpc\.php" />
+        <action type="CustomResponse" statusCode="403" statusReason="Forbidden: Access is denied" statusDescription="XML-RPC is disabled on this site" />
+      </rule>
+    </rules>
+  </rewrite>
+</system.webServer>
+```
+
+```sh
+# Forbid xmlrpc.php requests
+<Files xmlrpc.php>
+  order deny,allow
+  deny from all
+  
+  allow from XXX.XXX.XXX.XXX
+</Files>
+
+```

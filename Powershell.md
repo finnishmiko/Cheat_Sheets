@@ -15,8 +15,14 @@ $spId = (Get-AzADServicePrincipal -DisplayName '<Service Principal display name>
 echo $spId;
 
 # Assign new role to SP
+New-AzRoleAssignment -ObjectId $spId -RoleDefinitionName "Reader" -Scope "/subscriptions/<subscription id>"
+New-AzRoleAssignment -ObjectId $spId -RoleDefinitionName "Contributor" -Scope "/subscriptions/<subscription id>/resourceGroups/<resource group name>"
+
+# Assign new role to SP
 New-AzRoleAssignment -ObjectId $spId -RoleDefinitionName "Storage Blob Data Contributor" -Scope "/subscriptions/<subscription id>/resourceGroups/<resource group name>/providers/Microsoft.Storage/storageAccounts/<storage account name>"
 
+# This doesn't work:
+Get-AzRoleAssignment -ObjectId $spId
 ```
 
 ## Azure CLI
@@ -51,6 +57,11 @@ az role assignment list --all
 
 # Check service principal's role with scope:
 az role assignment list --assignee <principalID> --scope <scope to check>
+
+# Create new role to scope (if missing)
+az role assignment create --role "Reader" --assignee "<principalId>" --description "<add text description>" --scope "/subscriptions/<subscription id>"
+
+az role assignment create --role "Contributor" --assignee "<principalId>" --description "<add text description>" --scope "/subscriptions/<subscription id>/resourceGroups/<resource group name>"
 
 # Create new role to scope (if missing)
 az role assignment create --role "Storage Blob Data Contributor" --assignee "<principalId>" --description "<add text description>" --scope "/subscriptions/<subscription id>/resourceGroups/<resource group name>/providers/Microsoft.Storage/storageAccounts/<storage account name>"

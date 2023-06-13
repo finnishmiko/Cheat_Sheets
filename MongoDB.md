@@ -287,3 +287,7 @@ db.adminCommand(
 )
 
 ```
+
+## MongoDB version upgrade
+
+Note that updating devcontainer's Mongo version from 4.4 to 5 breaks existing data.
