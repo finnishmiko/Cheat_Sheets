@@ -62,6 +62,9 @@ Add public key to Virtual Machine's `.ssh` folder `authorized_keys` file.
 
 ```
 cat id_rsa.pub > ~\.ssh\authorized_keys
+
+# or
+ssh-copy-id -i ~/.ssh/id_rsa.pub user@host
 ```
 
 In local machine `.ssh` folder add file `config` with content:

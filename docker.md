@@ -33,6 +33,10 @@ docker logs -f CONTAINER &> logname.log &
 # last & runs the method in the background.
 
 docker service logs SERVICE
+
+# Debug why container didn't start:
+docker stach ls
+docker stack ps STACK
 ```
 
 Go into the container

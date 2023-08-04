@@ -80,6 +80,7 @@ Now you can use this certificate f.ex. in Azure Web App. Go to `TLS/SSL settings
 
 1. From the Key vault Certificates tab open the certificate.
 2. Click New Version button and then Create.
+  - Check that the CA is not "Self-signed certificate", but a "Certificate issued by a non-integrated CA".
 3. From the Certificate Operation tab CSR-file can be downloaded. Send this to CA for signing.
 4. When you get .cer file back use Merge Signed Request option.
 

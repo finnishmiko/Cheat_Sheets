@@ -7,13 +7,38 @@ echo | openssl s_client -servername www.domaintocheck.fi -connect www.domaintoch
 ```
 
 Local IP address:
+
 ```bash
 hostname -I
 ```
 
 Check the kernel version:
+
 ```bash
 uname -r
+```
+
+## Ubuntu install
+
+Install desktop version with minimal settings.
+
+```sh
+sudo apt install netstat
+# sudo apt install ufw
+# sudo apt remove ufw
+sudo apt openssh-server
+sudo apt install make
+```
+
+```sh
+sudo netstat -ntlp
+# sudo systemctl status ufw
+sudo iptables -L -nv
+
+```
+
+```sh
+ssh-copy-id -i ~/.ssh/id_rsa.pub user@host
 ```
 
 ## Curl
@@ -31,10 +56,10 @@ curl -v -A Twitterbot https://address/to/check >> save-to-file.txt
 ^ is the start of the url.
 $ is the end of the url.
 . is any character.
-* means 0 or more of any character.
-+ means 1 or more of any character.
 
+- means 0 or more of any character.
 
+* means 1 or more of any character.
 
 ```
 #!/bin/bash
