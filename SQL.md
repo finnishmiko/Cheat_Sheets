@@ -8,6 +8,7 @@ docker exec -it mariadb_container_name mysql -u username --password=password
 
 help
 SHOW DATABASES;
+CREATE DATABASE databasename;
 USE databasename;
 SHOW TABLES;
 SELECT * FROM tablename;
@@ -54,6 +55,8 @@ docker cp $MariaDBInstance":/tmp/databasedump.sql" .
 Change wp_options table's home and siteurl values to devcontainer's url:
 
 ```powershell
+$MariaDBInstance = (docker ps -q --filter="name=mariadb_db" --format "{{.Names}}") | Out-String | ForEach-Object {$_.Trim()}
+docker exec -it $MariaDBInstance mysql -u username -p
 docker exec -it $MariaDBInstance mysql -u username --password=password
 
 SELECT * FROM wp_options WHERE option_name = 'home';
