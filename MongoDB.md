@@ -203,6 +203,27 @@ rm -rf /tmp/backup
 
 Mongoose model includes Mongo's functions. To create a plain object use `.toObject()`
 
+## Typescript Populate
+
+```typescript
+// Example without types
+const dataList = await Model.find({}).populate(['address', 'user']);
+const dataList: Omit<IOrderModel & {
+    _id: Types.ObjectId;
+}, never>[]
+
+
+// Example with types
+const data = await Model.find({}).populate<{address: IAddressModel; user: IUserModel}>(['address', 'user']);
+const dataList: (Omit<IModel & {
+    _id: Types.ObjectId;
+}, "address" | "user"> & {
+    address: IAddressModel;
+    user: IUserModel;
+})[]
+
+```	
+
 #### Populate sub-sub-documents:
 
 ```sh
@@ -261,7 +282,7 @@ db.inventory.find({ $or: queryList });
 
 ## Check featureCompatibilityVersion 
 
-```
+```sh
 
 rs.config()
 rs.status()

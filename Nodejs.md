@@ -336,3 +336,25 @@ console.time("testCode");
 // Code to test here
 console.timeEnd("testCode");
 ```
+
+## Check if array is empty or doesn't exist
+
+```js
+if (!array || !array.length) {
+  // array empty or does not exist
+}
+// or
+if (!array?.length) {
+  // array empty or does not exist
+}
+
+// or the opposite
+
+if (array && array.length) {
+  // array exists and is not empty
+}
+// or
+if (array?.length) {
+  // array exists and is not empty
+}
+```
