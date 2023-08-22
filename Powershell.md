@@ -105,6 +105,7 @@ Check DNS-records:
 nslookup -type=TXT test.com
 nslookup -type=CNAME test.com
 nslookup -type=A test.com
+nslookup -type=MX test.com
 
 Resolve-DnsName test.com
 ```

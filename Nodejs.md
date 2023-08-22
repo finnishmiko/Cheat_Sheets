@@ -337,6 +337,14 @@ console.time("testCode");
 console.timeEnd("testCode");
 ```
 
+NodeJs backend with `server-timing` package:
+  
+  ```js
+  res.startTime('name', 'details');
+  res.endTime('name');
+  ```
+
+
 ## Check if array is empty or doesn't exist
 
 ```js
