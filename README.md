@@ -52,10 +52,14 @@ In home `folder/.ssh` run:
 
 ```sh
 ssh-keygen -t rsa
+ssh-keygen -t ed25519
 # Filename f.ex. id_rsa
 
 # Check created public key:
 more id_rsa.pub
+
+# use new key from custom location with ssh:
+ssh -i ~/custom/location/id_ed25519 user@host
 ```
 
 Add public key to Virtual Machine's `.ssh` folder `authorized_keys` file.

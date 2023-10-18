@@ -1,6 +1,17 @@
 # CSS
 
-Customize scroll bar.
+## Owerflow, hyphens
+
+The white-space CSS property for white space inside an element.
+
+The owerflow-wrap to break words.
+
+
+Hidden `&shy;` (soft hyphen) can be used. It is not visible in the text but it can be used to hint browser where to break the word.
+
+<wbr>: The Line Break Opportunity element.
+
+## Customize scroll bar.
 Note that this doesn't work in iPhone.
 
 ```

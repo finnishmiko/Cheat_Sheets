@@ -200,3 +200,40 @@ Deploy to Azure Windows Web app slot.
     RemoveAdditionalFilesFlag: true
 
 ```
+
+## Use secure files in pipeline
+
+Add secure file in DevOps portal `Pipelines` -> `Library` -> `Secure files` -> `+ Secure file`. For example SSH key usage to backup files with SFTP in pipeline:
+
+```yml
+- task: DownloadSecureFile@1
+  name: SSH_KEY
+  displayName: 'Download secure file'
+  inputs:
+    secureFile: 'id_mykey'
+
+- name: Copy SSH key
+    script: |
+      mkdir .ssh
+      cp $(SSH_KEY.secureFilePath) .ssh/id_rsa
+      chmod 600 .ssh/id_rsa
+    workingDirectory: "$(System.DefaultWorkingDirectory)"
+
+- name: Backup files
+    script: |
+      mkdir backup
+      sftp -r -oStrictHostKeyChecking=no -oIdentityFile=.ssh/id_rsa $(SFTP_USER)@$(SFTP_HOST):. backup
+    workingDirectory: "$(System.DefaultWorkingDirectory)"
+
+- name: Remove SSH key
+    script: |
+      rm -rf .ssh
+    workingDirectory: "$(System.DefaultWorkingDirectory)"
+
+- name: Create archive
+    script: |
+      FILENAME=backup-$(date '+%Y-%m-%d').tar.gz
+      tar cvfz $FILENAME backup
+      ls -la
+    workingDirectory: "$(System.DefaultWorkingDirectory)"
+```
