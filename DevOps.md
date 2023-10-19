@@ -212,28 +212,27 @@ Add secure file in DevOps portal `Pipelines` -> `Library` -> `Secure files` -> `
   inputs:
     secureFile: 'id_mykey'
 
-- name: Copy SSH key
-    script: |
-      mkdir .ssh
-      cp $(SSH_KEY.secureFilePath) .ssh/id_rsa
-      chmod 600 .ssh/id_rsa
-    workingDirectory: "$(System.DefaultWorkingDirectory)"
+- script: |
+    mkdir .ssh
+    cp $(SSH_KEY.secureFilePath) .ssh/id_rsa
+    chmod 600 .ssh/id_rsa
+  workingDirectory: "$(System.DefaultWorkingDirectory)"
+  displayName: Copy SSH key
 
-- name: Backup files
-    script: |
-      mkdir backup
-      sftp -r -oStrictHostKeyChecking=no -oIdentityFile=.ssh/id_rsa $(SFTP_USER)@$(SFTP_HOST):. backup
-    workingDirectory: "$(System.DefaultWorkingDirectory)"
+- script: |
+    mkdir backup
+    sftp -r -oStrictHostKeyChecking=no -oIdentityFile=.ssh/id_rsa $(SFTP_USER)@$(SFTP_HOST):. backup
+  workingDirectory: "$(System.DefaultWorkingDirectory)"
+  displayName: Backup files
 
-- name: Remove SSH key
-    script: |
-      rm -rf .ssh
-    workingDirectory: "$(System.DefaultWorkingDirectory)"
+- script: |
+    rm -rf .ssh
+  workingDirectory: "$(System.DefaultWorkingDirectory)"
+  displayName: Remove SSH key
 
-- name: Create archive
-    script: |
-      FILENAME=backup-$(date '+%Y-%m-%d').tar.gz
-      tar cvfz $FILENAME backup
-      ls -la
-    workingDirectory: "$(System.DefaultWorkingDirectory)"
+- script: |
+    FILENAME=backup-$(date '+%Y-%m-%d').tar.gz
+    tar cvfz $FILENAME backup
+  workingDirectory: "$(System.DefaultWorkingDirectory)"
+  displayName: Create archive
 ```
