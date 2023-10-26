@@ -1,5 +1,11 @@
 # Azure DevOps
 
+## Add Pull-Request check
+
+First create a pipeline to your project. F.ex. `/pipeline/pull-req-test.yaml`. Then add new pipeline that uses this file.
+
+Then from project settings select `Repositories` and select repository. Then select `Policies` tab and `Branch Policies`. Select the branch and add new policy. Select `Build validation` and select the pipeline that was created.
+
 ## Service connection to Azure resources with Service Principal
 
 From DevOps portal select `Settings`, `Service connections` and click `New service connection`. Select `Azure Resource Manager` option and for Service Principal there are two options:
