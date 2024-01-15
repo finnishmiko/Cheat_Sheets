@@ -375,3 +375,34 @@ else
     exit 1
 fi
 ```
+
+## Submodules
+
+When cloning repository with submodules:
+
+```sh
+git submodule init
+git submodule update
+```
+
+Create new submodule project:
+
+```sh
+git submodule add ../api-interface.git src/api
+```
+
+This will create `.gitmodules`
+    
+```sh
+[submodule "src/api"]
+path = src/api
+url = ../api-interface.git
+```
+
+And add to .git/config
+    
+```sh
+[submodule "src/api"]
+active = true
+url = https://github.com/<user>/api-interface.git
+```

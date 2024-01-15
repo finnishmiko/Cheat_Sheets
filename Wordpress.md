@@ -614,3 +614,12 @@ Repeat the above command for each image you want to convert.
 </Files>
 
 ```
+
+## Wordpress update asks FTP credentials
+
+```sh
+# Add following to wp-config.php
+
+/** Update requires FTP-credentials */
+define('FS_METHOD', 'direct');
+```

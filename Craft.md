@@ -15,6 +15,8 @@ There are few cases where you need to temporarily open the admin area in product
 
 ```sh
 php craft help
+
+php craft clear-caches/all
 ```
 
 F.ex. Generate security key or app_id:
@@ -22,6 +24,16 @@ F.ex. Generate security key or app_id:
 ```sh
 php craft setup/security-key
 php craft setup/app-id
+```
+
+Craft update
+
+```sh
+# Check updates
+php craft update
+
+# Update to specific version
+php craft update craftcms/cms:3.5.17
 ```
 
 Commands for migration and project config after staging update:
@@ -51,4 +63,29 @@ Get current entry's top level ancestor:
 
 ```twig
 {% set rootEntry = entry.getAncestors().first() %}
+```
+
+### Two queries where second continues where first left
+
+```twig
+{# Query first four entries #}
+{% set firstEntries = craft.entries().section('sectionName')
+	.relatedTo(filterQuery)
+	.search(search)
+	.orderBy('postDate DESC')
+	.limit(4).all() %}
+
+{# Get the rest of the articles #}
+{% set timeAtom = (firstEntries is defined and firstEntries|length ? (firstEntries|last.postDate|atom) : now|atom) %}
+
+{% set secondQuery = craft.entries().section('sectionName')
+	.relatedTo(filterQuery)
+	.search(search)
+	.postDate('<' ~ (timeAtom))
+	.orderBy('postDate DESC')
+	.limit(6)
+%}
+{% paginate secondQuery as pageInfo, secondEntries %}
+	
+
 ```
