@@ -124,6 +124,7 @@ Convert existing Mongo to replica set:
 services:
   mongodb:
     image: mongo
+    hostname: my-mongo
     entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs"]
 ```
 
@@ -134,6 +135,14 @@ docker exec -it mongodb_container mongosh
 rs.initiate()
 rs.status()
 ```
+
+Add hostname to .yml file and change that to rs.conf():
+```sh
+cnf = rs.conf()
+cnf.members[0].host = "my-mongo"
+rs.reconfig(cnf, {force: true})
+```
+
 
 ---
 
@@ -302,7 +311,8 @@ db.adminCommand(
 
 db.adminCommand(
    {
-     setFeatureCompatibilityVersion: 4.4,
+     setFeatureCompatibilityVersion: 7.0,
+     confirm: true,
      writeConcern: { wtimeout: 1000 }
    }
 )
