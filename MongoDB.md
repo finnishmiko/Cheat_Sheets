@@ -22,7 +22,7 @@ Shell:
 - Delete document: `db.collection.deleteOne({<query>})`
   - Delete from all documents key value pair where key is "email": `.updateMany({}, {$unset: {email: {$exists: 1}}})`
 - Inser document: `db.collection.insertOne({name: "Name"})`
-- Update codument. Both booleans below defaults false. Upsert true means that new document is created if no document match the filter.
+- Update document. Both booleans below defaults false. Upsert true means that new document is created if no document match the filter.
 
 ```sh
 db.collection.findOneAndUpdate(

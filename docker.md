@@ -13,6 +13,7 @@
 - `docker images`
 - `docker volume ls`
 - `docker service ls`
+- `docker stats <CONTAINER>`
 
 | Command                                                                 | Description                                    |
 | ----------------------------------------------------------------------- | ---------------------------------------------- |
@@ -35,7 +36,7 @@ docker logs -f CONTAINER &> logname.log &
 docker service logs SERVICE
 
 # Debug why container didn't start:
-docker stach ls
+docker stack ls
 docker stack ps STACK
 ```
 
